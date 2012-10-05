@@ -41,5 +41,8 @@ ds <- ds[, !(colnames(ds) %in% c("County"))] #Drop the dirty county variable.
 dsSummaryCounty <- count(ds, c("CountyID"))
 dsSummaryCountyYear <- count(ds, c("CountyID", "Year"))
 
+dsSummaryCounty <- plyr::rename(dsSummaryCounty, replace=c(freq="Count"))
+dsSummaryCountyYear <- plyr::rename(dsSummaryCountyYear, replace=c(freq="Count"))
+
 write.csv(dsSummaryCounty, pathOutputSummaryCounty, row.names=FALSE)
 write.csv(dsSummaryCountyYear, pathOutputSummaryCountyYear, row.names=FALSE)
