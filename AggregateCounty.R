@@ -3,6 +3,8 @@ require(RODBC)
 require(plyr) #For renaming columns
 
 pathWorkingDatasets <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/SafeCareCostEffectiveness/WorkingDatasets"
+# pathWorkingDatasets <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
+pathOutputSummaryCounty <- file.path(pathWorkingDatasets, "CountCounty.csv")
 pathOutputSummaryCountyYear <- file.path(pathWorkingDatasets, "CountCountyYear.csv")
 # pathToOcs2000 <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/Db-Files/OCS/OCS2000.mdb"
 # channelOcs2000 <- odbcConnectAccess2007(odbcConnectAccess)
@@ -39,4 +41,5 @@ ds <- ds[, !(colnames(ds) %in% c("County"))] #Drop the dirty county variable.
 dsSummaryCounty <- count(ds, c("CountyID"))
 dsSummaryCountyYear <- count(ds, c("CountyID", "Year"))
 
-write.csv(ds, pathOutputSummaryCountyYear, row.names=FALSE)
+write.csv(dsSummaryCounty, pathOutputSummaryCounty, row.names=FALSE)
+write.csv(dsSummaryCountyYear, pathOutputSummaryCountyYear, row.names=FALSE)
