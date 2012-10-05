@@ -1,6 +1,6 @@
 rm(list=ls(all=TRUE))  #Clears variables
 require(RODBC)
-require(reshape) #For renaming columns
+require(plyr) #For renaming columns
 
 # pathToOcs2000 <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/Db-Files/OCS/OCS2000.mdb"
 # channelOcs2000 <- odbcConnectAccess2007(odbcConnectAccess)
@@ -20,13 +20,10 @@ for( table in msurTableNames ) {
   print(paste("Table", table, "has been retrieved with", nrow(dsMsurYear), "rows."))
   ds <- rbind(ds, dsMsurYear[, desiredColumns])
 }
-
 odbcClose(channel2000)
+ds <- plyr::rename(ds, replace=c(county="County"))
 
-#regexPattern <-"[:digit:]+"
-# regexPattern <-"\\d+"
-# countyClean <- grep(pattern=regexPattern, x=ds$county, value=TRUE)
-regexPattern <- "[a-z A-Z]" #\\[+"
-# regexPattern <-"[c]"
-countyClean <- as.numeric(gsub(pattern=regexPattern,replacement="", x=ds$county))
-sort(unique(countyClean))
+regexPattern <- "[a-z A-Z]"
+ds$CountyID <- as.integer(gsub(pattern=regexPattern, replacement="", x=ds$County))
+# sort(unique(ds$CountyID))
+# class(ds$CountyID)
