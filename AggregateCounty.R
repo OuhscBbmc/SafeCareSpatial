@@ -6,12 +6,15 @@ pathWorkingDatasets <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/SafeCareCos
 # pathWorkingDatasets <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
 pathOutputSummaryCounty <- file.path(pathWorkingDatasets, "CountCounty.csv")
 pathOutputSummaryCountyYear <- file.path(pathWorkingDatasets, "CountCountyYear.csv")
+
+#pathCountyLookupTable <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/LookupTables/CountyLookups.csv"
+pathCountyLookupTable <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/SafeCareCostEffectiveness/ReadonlyDatabases/CountyLookups.csv"
+
 # pathToOcs2000 <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/Db-Files/OCS/OCS2000.mdb"
 # channelOcs2000 <- odbcConnectAccess2007(odbcConnectAccess)
 
 msurTableNames <- c("MSUR 06-02","MSUR 06-03","MSUR 06-04","MSUR 06-05","MSUR 06-06","MSUR 06-07","MSUR 06-08","MSUR 06-09","MSUR 06-10","MSUR 06-11","MSUR 06-12")
-msurYear <- 2002 + seq_along(msurTableNames) -1 
-# msurTableNames <- c("MSUR 06-02","MSUR 06-03","MSUR 06-04")
+msurYear <- 2002 + seq_along(msurTableNames) - 1 
 desiredColumns <- c("MsurSource", "Year", "KK", "county")
 ds <- data.frame(MsurSource=character(0), Year=numeric(0), KK=numeric(0), County=character(0))
 
@@ -38,8 +41,12 @@ ds$CountyID <- as.integer(gsub(pattern=regexPattern, replacement="", x=ds$County
 # class(ds$CountyID)
 ds <- ds[, !(colnames(ds) %in% c("County"))] #Drop the dirty county variable.
 
-dsSummaryCounty <- count(ds, c("CountyID"))
-dsSummaryCountyYear <- count(ds, c("CountyID", "Year"))
+dsCountyNames <- read.csv(pathCountyLookupTable)
+dsCountyNames <- plyr::rename(dsCountyNames, replace=c(Name="CountyName"))
+ds <- merge(x=ds, y=dsCountyNames, by.x="CountyID", by.y="ID")
+
+dsSummaryCounty <- count(ds, c("CountyID", "CountyName"))
+dsSummaryCountyYear <- count(ds, c("CountyID", "CountyName", "Year"))
 
 dsSummaryCounty <- plyr::rename(dsSummaryCounty, replace=c(freq="Count"))
 dsSummaryCountyYear <- plyr::rename(dsSummaryCountyYear, replace=c(freq="Count"))
