@@ -69,6 +69,10 @@ dsReferral <- plyr::rename(dsReferral, replace=c(ReferId="ReferralID", CaseId="K
 # dsReferral$ReferralMonth <- as.Date(ISOdate(year(dsReferral$ReferralDate), month(dsReferral$ReferralDate), 1))
 
 dsAllegation <- plyr::rename(dsAllegation, replace=c(ReferId="ReferralID", VctmId="VictimID"))
+length(unique(dsAllegation$ReferralID))
+length(unique(dsAllegation$VictimID))
+#table(dsAllegation$ReferralID, dsAllegation$VictimID)
+# count(dsAllegation. c("ReferralID", "VictimID"))
 # count(dsAllegation, "ReferId")
 
 startTime <- Sys.time()
