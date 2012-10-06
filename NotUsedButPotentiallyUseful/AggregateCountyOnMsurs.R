@@ -10,30 +10,34 @@ pathOutputSummaryCountyYear <- file.path(pathWorkingDatasets, "CountCountyYear.c
 #pathCountyLookupTable <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/LookupTables/CountyLookups.csv"
 pathCountyLookupTable <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/SafeCareCostEffectiveness/ReadonlyDatabases/CountyLookups.csv"
 
-# pathToOcs2000 <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/Db-Files/OCS/OCS2000.mdb"
-# channelOcs2000 <- odbcConnectAccess2007(odbcConnectAccess)
-
 msurTableNames <- c("MSUR 06-02","MSUR 06-03","MSUR 06-04","MSUR 06-05","MSUR 06-06","MSUR 06-07","MSUR 06-08","MSUR 06-09","MSUR 06-10","MSUR 06-11","MSUR 06-12")
 msurYear <- 2002 + seq_along(msurTableNames) - 1 
 desiredColumns <- c("MsurSource", "Year", "KK", "county")
 ds <- data.frame(MsurSource=character(0), Year=numeric(0), KK=numeric(0), County=character(0))
 
 #This DSN points to \\dch-res\PEDS-FILE-SV\Data\CCAN\CCANResEval\SafeCareCostEffectiveness\ReadonlyDatabases\OCS2000.mdb
-channel2000 <- odbcConnect(dsn="Ocs2000")
-odbcGetInfo(channel2000) 
-# dsTables <- sqlTables(channel2000)
+channelOcs2000 <- odbcConnect(dsn="SafeCareOcs2000")
+#odbcGetInfo(channelOcs2000) #dsTables <- sqlTables(channelOcs2000)
 for( tableID in seq_along(msurTableNames) ) {
   table <- msurTableNames[tableID]
   
-  dsMsurYear <- sqlFetch(channel2000, table, stringsAsFactors=FALSE)
+  dsMsurYear <- sqlFetch(channelOcs2000, table, stringsAsFactors=FALSE)
   dsMsurYear$MsurSource <- table
   dsMsurYear$Year <- msurYear[tableID]
   print(paste("Table", table, "has been retrieved with", nrow(dsMsurYear), "rows."))
   ds <- rbind(ds, dsMsurYear[, desiredColumns])
 }
-odbcClose(channel2000)
+odbcClose(channelOcs2000)
 ds <- plyr::rename(ds, replace=c(county="County"))
 ds <- ds[!is.na(ds$County), ] #Drop the cases with missing counties.
+
+# dsSummaryKK <- count(ds, c("KK"))
+# dsSummaryKK <- dsSummaryKK[order(-dsSummaryKK$freq), ]
+# count(df=dsSummaryKK, vars="freq")
+# 
+# dsSummaryKKYear <- count(ds, c("KK", "MsurSource"))
+# dsSummaryKKYear <- dsSummaryKKYear[order(-dsSummaryKKYear$freq), ]
+# count(df=dsSummaryKKYear, vars="freq")
 
 regexPattern <- "[a-z A-Z]"
 ds$CountyID <- as.integer(gsub(pattern=regexPattern, replacement="", x=ds$County))
