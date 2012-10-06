@@ -1,3 +1,7 @@
+#http://blogs.luc.edu/rwill5/2012/01/29/experimenting-with-maps-in-r/
+
+
+
 rm(list=ls(all=TRUE)[!(ls(all=TRUE) %in% c("spDataFrameCounty", "spDataFrameTract", "spDataFrameBlock", "spDataFrameLakes", 
                                            "splDataFrameRivers", "splDataFrameHighways", "spNationalParks", "spMilitaryBases", "deviceWidth"))])
 require(maps)
@@ -7,6 +11,7 @@ require(RColorBrewer)
 require(colorspace)
 # require(classInt)
 require(fields)
+require(ggplot2)
 
 # deviceWidth <- 10 #20 #10 #6.5
 # if( names(dev.cur()) != "null device" ) dev.off()
@@ -64,16 +69,19 @@ if( deviceWidth==20 ) { #Designed to almost fill a 20" widescreen monitor (1680x
   countyLabelSize <- 1.  
 }
 
-oldPar <- par(mfrow=c(1,1), mar=c(0,0,0,0))
+g <- ggplot(ds, aes(map_id = CountyID)) 
+g <- g + geom_map(aes(fill = Count), map = sp)
 
-plot(sp, col=colorsQuantiles[findInterval(sp@data[, dvName], breaksQuartile, all.inside=TRUE)], axes=F, border="gray70")
-text(titleTopPlot, x=-101.5, y=36.2, cex=titleSize)
-legend(x=-102.5,y=35.5, legend=leglabs(breaksQuartile), fill=colorsQuantiles, bty="n", title=legendTopPlot, cex=explanationSize)
-
-countyLabelsLine1 <- paste(ds$CountyName, "\n", sep="")
-countyLabelsLine2 <- paste("\n", format(ds[, dvName], big.mark=","), sep="")
-text(labelCoordinates, labels=countyLabelsLine1, col="black", cex=countyLabelSize)
-text(labelCoordinates, labels=countyLabelsLine2, col=colorsQuantilesLabels[findInterval(sp@data[, dvName], breaksQuartile, all.inside=TRUE)], cex=countyLabelSize)
-
-text("CCAN and DHS", x=-99, y=33.45, pos=3, col="gray60", cex=explanationSize)
-par(oldPar)
+# oldPar <- par(mfrow=c(1,1), mar=c(0,0,0,0))
+# 
+# plot(sp, col=colorsQuantiles[findInterval(sp@data[, dvName], breaksQuartile, all.inside=TRUE)], axes=F, border="gray70")
+# text(titleTopPlot, x=-101.5, y=36.2, cex=titleSize)
+# legend(x=-102.5,y=35.5, legend=leglabs(breaksQuartile), fill=colorsQuantiles, bty="n", title=legendTopPlot, cex=explanationSize)
+# 
+# countyLabelsLine1 <- paste(ds$CountyName, "\n", sep="")
+# countyLabelsLine2 <- paste("\n", format(ds[, dvName], big.mark=","), sep="")
+# text(labelCoordinates, labels=countyLabelsLine1, col="black", cex=countyLabelSize)
+# text(labelCoordinates, labels=countyLabelsLine2, col=colorsQuantilesLabels[findInterval(sp@data[, dvName], breaksQuartile, all.inside=TRUE)], cex=countyLabelSize)
+# 
+# text("CCAN and DHS", x=-99, y=33.45, pos=3, col="gray60", cex=explanationSize)
+# par(oldPar)
