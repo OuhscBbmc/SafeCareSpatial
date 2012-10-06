@@ -3,6 +3,12 @@ require(RODBC)
 require(plyr) #For renaming columns
 require(lubridate) #For dealing with dates
 
+#If the parallel version is used:
+library(foreach)
+library(doParallel)
+workers <- makeCluster(4) #4 threads
+registerDoParallel(workers)
+
 pathWorkingDatasets <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/SafeCareCostEffectiveness/WorkingDatasets"
 # pathWorkingDatasets <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
 pathOutputSummaryCounty <- file.path(pathWorkingDatasets, "CountCounty.csv")
@@ -71,7 +77,10 @@ CollapseAllegations <- function( df ) {
   ))
 }
 
-dsAllegationByVictimAndReferral <- ddply(dsAllegation, .variables=c("ReferralID", "VictimID"), CollapseAllegations)
+dsAllegationByVictimAndReferral <- ddply(dsAllegation, 
+                                         .variables=c("ReferralID", "VictimID"), 
+                                         CollapseAllegations, .parallel=TRUE  
+                                         )
 Sys.time() - startTime #Serial: 2.664216 mins
 
 # ds <- merge(x=dsReferral, y=dsAllegation, by="ReferralID", all.x=TRUE, all.y=FALSE)
@@ -82,7 +91,7 @@ dsCountyNames <- read.csv(pathCountyLookupTable)
 dsCountyNames <- plyr::rename(dsCountyNames, replace=c(Name="CountyName"))
 dsMsur <- merge(x=dsMsur, y=dsCountyNames, by.x="CountyID", by.y="ID")
 
-CollapseMsur
+# CollapseMsur
 
 dsSummaryCounty <- count(dsMsur, c("CountyID", "CountyName"))
 dsSummaryCountyYear <- count(dsMsur, c("CountyID", "CountyName", "Year"))
