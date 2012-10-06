@@ -19,7 +19,7 @@ desiredColumns <- c("MsurSource", "Year", "KK", "county")
 ds <- data.frame(MsurSource=character(0), Year=numeric(0), KK=numeric(0), County=character(0))
 
 #This DSN points to \\dch-res\PEDS-FILE-SV\Data\CCAN\CCANResEval\SafeCareCostEffectiveness\ReadonlyDatabases\OCS2000.mdb
-channel2000 <- odbcConnect(dsn="Ocs2000Dsn")
+channel2000 <- odbcConnect(dsn="Ocs2000")
 odbcGetInfo(channel2000) 
 # dsTables <- sqlTables(channel2000)
 for( tableID in seq_along(msurTableNames) ) {
