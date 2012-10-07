@@ -1,3 +1,5 @@
+#From the help page: http://docs.ggplot2.org/current/geom_map.html
+
 rm(list=ls(all=TRUE))
 ids <- factor(c("1.1", "2.1", "1.2", "2.2", "1.3", "2.3"))
 
