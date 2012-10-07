@@ -11,16 +11,19 @@
 pathInputDirectory <- file.path(getwd(), "PhiFreeDatasets")
 pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
 
-dsValueAllVariables <- read.csv(pathInputSummaryCounty)
+dsValueAllVariables <- read.csv(pathInputSummaryCounty, stringsAsFactors = FALSE)
 ```
 
 
 
 ```r
-dvName <- "CountPerCapita"  #The number of victims per county population; darker counties are more safe
-dsValue <- data.frame(CountyName = tolower(dsValueAllVariables$CountyName), 
-    DV = dsValueAllVariables[, dvName])
-MapCounties(dsValue)
+dvName <- "CountPerCapita"  #The number of victims per county population; darker counties have more victims
+dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
+# dsValueAllVariables$DVLabel <- round(dsValueAllVariables$DV, 2) #Keeps
+# leading zeros
+dsValueAllVariables$DVLabel <- gsub("^0.", ".", round(dsValueAllVariables$DV, 
+    2))  #Remove leading zeros.
+MapCounties(dsValueAllVariables, deviceWidth = 14)
 ```
 
 ![plot of chunk CountPerCapita](figure/CountPerCapita.png) 
@@ -28,12 +31,11 @@ MapCounties(dsValue)
 
 
 ```r
-dvName <- "CountPerCapitaRank"  #The county's rank for the number of victims per county population; darker counties are more safe
-dsValue <- data.frame(CountyName = tolower(dsValueAllVariables$CountyName), 
-    DV = dsValueAllVariables[, dvName])
-MapCounties(dsValue)
+dvName <- "CountPerCapitaRank"  #The county's rank for the number of victims per county population; darker counties have more victims
+dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
+dsValueAllVariables$DVLabel <- dsValueAllVariables$DV
+MapCounties(dsValueAllVariables, deviceWidth = 14)
 ```
 
 ![plot of chunk CountPerCapitaRank](figure/CountPerCapitaRank.png) 
-
 

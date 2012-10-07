@@ -28,27 +28,27 @@ colorPower <- 1
 # roundedDigits <- 0
 # colorPower <- 2
 
-dsValueAllVariables <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
-dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
-dsValueAllVariables$DVLabel <- round(dsValueAllVariables$DV, roundedDigits)
+dsValue <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
+dsValue$DV <- dsValue[, dvName]
+dsValue$DVLabel <- round(dsValue$DV, roundedDigits)
 
-dsValue <- data.frame(
-  CountyID=dsValueAllVariables$CountyID, 
-  CountyNameLower=tolower(dsValueAllVariables$CountyName), 
-  CountyName=dsValueAllVariables$CountyName, 
-  LabelLongitude=dsValueAllVariables$LabelLongitude,
-  LabelLatitude=dsValueAllVariables$LabelLatitude,
-  DV=dsValueAllVariables$DV, 
-  DVLabel=dsValueAllVariables$DVLabel,
+dsValuePlot <- data.frame(
+  CountyID=dsValue$CountyID, 
+  CountyNameLower=tolower(dsValue$CountyName), 
+  CountyName=dsValue$CountyName, 
+  LabelLongitude=dsValue$LabelLongitude,
+  LabelLatitude=dsValue$LabelLatitude,
+  DV=dsValue$DV, 
+  DVLabel=dsValue$DVLabel,
   stringsAsFactors=FALSE
 )
 
 intervalCount <- 3
-#breakPoints <- pretty(dsValue$DV, n=intervalCount)
-breakPoints <- seq(from=min(dsValue$DV),to=max(dsValue$DV), length.out=intervalCount+1)
+#breakPoints <- pretty(dsValuePlot$DV, n=intervalCount)
+breakPoints <- seq(from=min(dsValuePlot$DV),to=max(dsValuePlot$DV), length.out=intervalCount+1)
 
 # highestFloor <- breakPoints[intervalCount]
-# inHighestCategory <- (dsValue$DV > highestFloor)
+# inHighestCategory <- (dsValuePlot$DV > highestFloor)
 paletteResource <- rev(sequential_hcl(n=intervalCount, h=340, c.=c(80, 0), l=c(40, 90), power=colorPower))
 
 DvInterval <- function( dv ) {
@@ -61,13 +61,13 @@ ContrastingColor <-function( color ){
   lightness <- c(0.2, 0.6, 0) %*% col2rgb(color)/255
   return( ifelse( lightness >= 0.4, "#0F0F0F", "#F0F0F0") )
 }
-dsValue$ColorFill <- ColorsContinuous(dsValue$DV)
-dsValue$ColorLabel <-t(ContrastingColor(dsValue$ColorFill))#[!inHighestCategory])) 
+dsValuePlot$ColorFill <- ColorsContinuous(dsValuePlot$DV)
+dsValuePlot$ColorLabel <-t(ContrastingColor(dsValuePlot$ColorFill))#[!inHighestCategory])) 
   
 dsBoundary <- map_data(map="county", region="OK")
 dsBoundary$region <- dsBoundary$subregion
 
-g <- ggplot(dsValue, aes_string(map_id="CountyNameLower", color="ColorLabel")) 
+g <- ggplot(dsValuePlot, aes_string(map_id="CountyNameLower", color="ColorLabel")) 
 g <- g + geom_map(aes_string(fill="ColorFill"), map=dsBoundary, color="gray20")
 #g <- g + geom_text(aes(label=CountyName, x=long, y=lat)) 
 g <- g + geom_text(aes_string(label="CountyName", x="LabelLongitude", y="LabelLatitude"), vjust=-.2, size=deviceWidth*.25)
