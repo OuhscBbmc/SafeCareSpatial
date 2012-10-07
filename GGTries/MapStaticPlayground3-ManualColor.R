@@ -5,8 +5,8 @@ require(maps)
 require(maptools)
 # require(sp)
 # require(RColorBrewer)
-# require(colorspace)
-# # require(classInt)
+require(colorspace)
+require(classInt)
 # require(fields)
 require(grid)
 require(ggplot2)
@@ -21,22 +21,34 @@ deviceWidth <- 10 #20 #10 #6.5
 pathInputDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
 pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
 
-# dvName <- "CountPerCapita"
-# roundedDigits <- 2
-# colorPower <- 1
-dvName <- "CountPerCapitaRank"
-roundedDigits <- 0
-colorPower <- 2
+dvName <- "CountPerCapita"
+roundedDigits <- 2
+colorPower <- 1
+# dvName <- "CountPerCapitaRank"
+# roundedDigits <- 0
+# colorPower <- 2
 
 dsValueAllVariables <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
-dsValue <- data.frame(CountyID=dsValueAllVariables$CountyID, CountyNameLower=tolower(dsValueAllVariables$CountyName), CountyName=dsValueAllVariables$CountyName, DV=dsValueAllVariables[, dvName], stringsAsFactors=FALSE)
+dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
+dsValueAllVariables$DVLabel <- round(dsValueAllVariables$DV, roundedDigits)
 
+dsValue <- data.frame(
+  CountyID=dsValueAllVariables$CountyID, 
+  CountyNameLower=tolower(dsValueAllVariables$CountyName), 
+  CountyName=dsValueAllVariables$CountyName, 
+  LabelLongitude=dsValueAllVariables$LabelLongitude,
+  LabelLatitude=dsValueAllVariables$LabelLatitude,
+  DV=dsValueAllVariables$DV, 
+  DVLabel=dsValueAllVariables$DVLabel,
+  stringsAsFactors=FALSE
+)
 
-breakPoints <- pretty(dsValue$DV, n=6)
-intervalCount <- length(breakPoints)-1
-highestFloor <- breakPoints[intervalCount]
-inHighestCategory <- (dsValue$DV > highestFloor)
-#paletteResource <- sequential_hcl(n=intervalCount, h=170, c. = c(80, 0), l = c(10, 98), power=1)
+intervalCount <- 3
+#breakPoints <- pretty(dsValue$DV, n=intervalCount)
+breakPoints <- seq(from=min(dsValue$DV),to=max(dsValue$DV), length.out=intervalCount+1)
+
+# highestFloor <- breakPoints[intervalCount]
+# inHighestCategory <- (dsValue$DV > highestFloor)
 paletteResource <- rev(sequential_hcl(n=intervalCount, h=340, c.=c(80, 0), l=c(40, 90), power=colorPower))
 
 DvInterval <- function( dv ) {
@@ -52,35 +64,16 @@ ContrastingColor <-function( color ){
 dsValue$ColorFill <- ColorsContinuous(dsValue$DV)
 dsValue$ColorLabel <-t(ContrastingColor(dsValue$ColorFill))#[!inHighestCategory])) 
   
-
 dsBoundary <- map_data(map="county", region="OK")
 dsBoundary$region <- dsBoundary$subregion
 
-dsCenterPoint <- map("county", "oklahoma", fill=TRUE, col="transparent", plot=FALSE)
-# countyIDs <- seq_along(dsCenterPoint$names) # cbind(seq_along(dsCenterPoint$names), order(dsCenterPoint$names))
-countyIDs <- order(dsCenterPoint$names) #Using the 'order' fx accounts for the different alphabetical schemes
-spForCenters <- map2SpatialPolygons(dsCenterPoint, IDs=countyIDs,  proj4string=CRS(" +proj=longlat +datum=NAD83 +ellps=GRS80 +towgs84=0,0,0"))
-spForCenters <- SpatialPolygonsDataFrame(spForCenters, data=dsValue)
-
-labelCoordinates <- coordinates(spForCenters)
-labelCoordinates[which(dsValue$CountyName=="Pottawatomie"), 2] <- coordinates(spForCenters)[which(dsValue$CountyName=="Pottawatomie"), 2] + .1
-labelCoordinates[which(dsValue$CountyName=="Love"), 2] <- coordinates(spForCenters)[which(dsValue$CountyName=="Love"), 2] + .05
-colnames(labelCoordinates) <- c("long", "lat")
-
-dsValue <- cbind(dsValue, labelCoordinates)
-rm(labelCoordinates, spForCenters, dsCenterPoint)
-
-# spFortified <- fortify(sp, region="ID")
-
-g <- ggplot(dsValue, aes(map_id=CountyNameLower, color=ColorLabel)) 
-g <- g + geom_map(aes(fill=ColorFill), map=dsBoundary, color="gray20")
-# g <- g + geom_map(aes(fill=DV), map=dsBoundary, color="gray20")
+g <- ggplot(dsValue, aes_string(map_id="CountyNameLower", color="ColorLabel")) 
+g <- g + geom_map(aes_string(fill="ColorFill"), map=dsBoundary, color="gray20")
 #g <- g + geom_text(aes(label=CountyName, x=long, y=lat)) 
-g <- g + geom_text(aes(label=CountyName, x=long, y=lat), vjust=-.2, size=deviceWidth*.25)
-g <- g + geom_text(aes(label=round(DV, roundedDigits), x=long, y=lat), vjust=1, size=deviceWidth*.35)
+g <- g + geom_text(aes_string(label="CountyName", x="LabelLongitude", y="LabelLatitude"), vjust=-.2, size=deviceWidth*.25)
+g <- g + geom_text(aes_string(label="DVLabel", x="LabelLongitude", y="LabelLatitude"), vjust=1, size=deviceWidth*.35)
 
 g <- g + expand_limits(x=dsBoundary$long, y=dsBoundary$lat) 
-# g <- g + scale_fill_gradient(name=dvName)
 g <- g + scale_fill_identity(name=dvName)
 g <- g + scale_color_identity()
 g <- g + coord_map()
