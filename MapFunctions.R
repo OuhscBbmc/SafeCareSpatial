@@ -15,7 +15,7 @@ require(plyr)
 
 
 
-MapCounties <- function( dsValue, deviceWidth=10, colorPower=1 ) {
+MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues=TRUE ) {
   dsValuePlot <- data.frame(
     CountyID=dsValue$CountyID, 
     CountyNameLower=tolower(dsValue$CountyName), 
@@ -54,9 +54,11 @@ MapCounties <- function( dsValue, deviceWidth=10, colorPower=1 ) {
   g <- ggplot(dsValuePlot, aes_string(map_id="CountyNameLower", color="ColorLabel")) 
   g <- g + geom_map(aes_string(fill="ColorFill"), map=dsBoundary, color="gray20")
   #g <- g + geom_text(aes(label=CountyName, x=long, y=lat)) 
-  g <- g + geom_text(aes_string(label="CountyName", x="LabelLongitude", y="LabelLatitude"), vjust=-.2, size=deviceWidth*.25)
-  g <- g + geom_text(aes_string(label="DVLabel", x="LabelLongitude", y="LabelLatitude"), vjust=1, size=deviceWidth*.35)
-  
+  if( showCountyValues ) {
+    g <- g + geom_text(aes_string(label="CountyName", x="LabelLongitude", y="LabelLatitude"), vjust=-.2, size=deviceWidth*.25)
+    g <- g + geom_text(aes_string(label="DVLabel", x="LabelLongitude", y="LabelLatitude"), vjust=1, size=deviceWidth*.35)
+  }
+
   g <- g + expand_limits(x=dsBoundary$long, y=dsBoundary$lat) 
   g <- g + scale_fill_identity(name=dvName)
   g <- g + scale_color_identity()

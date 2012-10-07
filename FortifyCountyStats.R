@@ -48,7 +48,8 @@ rm(labelCoordinates, spForCenters, dsCenterPoint)
 ################################################################################################
 years <- sort(unique(dsCountyYear$Year))
 
-dsCountyYearFortified <- data.frame(CountyID=integer(0), CountyName=character(0), Year=integer(0), Count=integer(0))
+dsCountyYearFortified <- data.frame(CountyID=integer(0), CountyName=character(0), Year=integer(0), Count=integer(0),
+  LabelLongitude=numeric(0), LabelLatitude=numeric(0))
 for( year in years ) {
   dsSlice <- dsCountyYear[dsCountyYear$Year==year, ]
   dsSlice <- merge(x=dsLookup, y=dsSlice, by.x="ID", by.y="CountyID", all.x=TRUE, all.y=FALSE)
@@ -57,6 +58,8 @@ for( year in years ) {
   dsSlice$Year <- year #This fills in the NAs that exist in the county's without a report that year.
   dsSlice <- plyr::rename(dsSlice, replace=c(ID="CountyID")) #Rename the ID column
   dsSlice <- dsSlice[, colnames(dsSlice) != "Name"] #Drop the redundant (County)Name column.
+  dsSlice$LabelLongitude <- 0
+  dsSlice$LabelLatitude <- 0
   dsCountyYearFortified <- rbind(dsCountyYearFortified, dsSlice)
 }
 
