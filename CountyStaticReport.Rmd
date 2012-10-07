@@ -16,14 +16,14 @@ pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.cs
 dsValueAllVariables <- read.csv(pathInputSummaryCounty)
 ```
 
-```{r fig.width=14, fig.height=7}
-dvName <- "CountPerCapita" #The number of victims per county population; lighter counties are more safe
+```{r CountPerCapita, fig.width=14, fig.height=7}
+dvName <- "CountPerCapita" #The number of victims per county population; darker counties are more safe
 dsValue <- data.frame(CountyName = tolower(dsValueAllVariables$CountyName), DV=dsValueAllVariables[, dvName])
 MapCounties(dsValue)
 ```
 
-```{r fig.width=14, fig.height=7}
-dvName <- "CountPerCapitaRank" #The county's rank for the number of victims per county population; lighter counties are more safe
+```{r CountPerCapitaRank, fig.width=14, fig.height=7}
+dvName <- "CountPerCapitaRank" #The county's rank for the number of victims per county population; darker counties are more safe
 dsValue <- data.frame(CountyName = tolower(dsValueAllVariables$CountyName), DV=dsValueAllVariables[, dvName])
 MapCounties(dsValue)
 ```

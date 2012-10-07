@@ -17,23 +17,23 @@ dsValueAllVariables <- read.csv(pathInputSummaryCounty)
 
 
 ```r
-dvName <- "CountPerCapita"  #The number of victims per county population; lighter counties are more safe
+dvName <- "CountPerCapita"  #The number of victims per county population; darker counties are more safe
 dsValue <- data.frame(CountyName = tolower(dsValueAllVariables$CountyName), 
     DV = dsValueAllVariables[, dvName])
 MapCounties(dsValue)
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
+![plot of chunk CountPerCapita](figure/CountPerCapita.png) 
 
 
 
 ```r
-dvName <- "CountPerCapitaRank"  #The county's rank for the number of victims per county population; lighter counties are more safe
+dvName <- "CountPerCapitaRank"  #The county's rank for the number of victims per county population; darker counties are more safe
 dsValue <- data.frame(CountyName = tolower(dsValueAllVariables$CountyName), 
     DV = dsValueAllVariables[, dvName])
 MapCounties(dsValue)
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
+![plot of chunk CountPerCapitaRank](figure/CountPerCapitaRank.png) 
 
 
