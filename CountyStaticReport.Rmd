@@ -2,6 +2,7 @@
 
 <!-- Point knitr to the underlying code file so it knows where to look for the chunks. -->
 ```{r, echo=FALSE, message=FALSE}
+require(scales)
 pathSourceMapFunctions <- file.path(getwd(), "MapFunctions.R")
 source(pathSourceMapFunctions)
 #This allows knitr to call chunks tagged in the underlying PrototypeCode.R file.
@@ -17,7 +18,7 @@ dsValueAllVariables <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
 ```
 
 ```{r CountPerCapita, fig.width=14, fig.height=7}
-dvName <- "CountPerCapita" #The number of victims per county population; darker counties have more victims
+dvName <- "CountPerCapita" #The number of victims per county population; darker counties have more victims, adjusted for pop
 dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
 # dsValueAllVariables$DVLabel <- round(dsValueAllVariables$DV, 2) #Keeps leading zeros
 dsValueAllVariables$DVLabel <- gsub("^0.", ".",round(dsValueAllVariables$DV,2)) #Remove leading zeros.
@@ -25,8 +26,22 @@ MapCounties(dsValueAllVariables, deviceWidth=14)
 ```
 
 ```{r CountPerCapitaRank, fig.width=14, fig.height=7}
-dvName <- "CountPerCapitaRank" #The county's rank for the number of victims per county population; darker counties have more victims
+dvName <- "CountPerCapitaRank" #The county's rank for the number of victims per county population; darker counties have more victims, adjusted for pop
 dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
 dsValueAllVariables$DVLabel <- dsValueAllVariables$DV
+MapCounties(dsValueAllVariables, deviceWidth=14)
+```
+
+```{r Count, fig.width=14, fig.height=7}
+dvName <- "Count" #The county's rank for the number of victims per county population; darker counties have more total victims
+dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
+dsValueAllVariables$DVLabel <- scales::comma(dsValueAllVariables$DV)
+MapCounties(dsValueAllVariables, deviceWidth=14)
+```
+
+```{r PopTotal, fig.width=14, fig.height=7}
+dvName <- "PopTotal" #The county's 2010 census population; darker counties have more people
+dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
+dsValueAllVariables$DVLabel <- scales::comma(dsValueAllVariables$DV)
 MapCounties(dsValueAllVariables, deviceWidth=14)
 ```
