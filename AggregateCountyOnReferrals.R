@@ -1,3 +1,5 @@
+###TODO: Change 'LeFlore' to 'Le Flore' county.
+
 rm(list=ls(all=TRUE))  #Clears variables
 require(RODBC)
 require(plyr) #For renaming columns

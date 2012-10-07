@@ -1,9 +1,6 @@
 #http://blogs.luc.edu/rwill5/2012/01/29/experimenting-with-maps-in-r/
 
-
-
-rm(list=ls(all=TRUE)[!(ls(all=TRUE) %in% c("spDataFrameCounty", "spDataFrameTract", "spDataFrameBlock", "spDataFrameLakes", 
-                                           "splDataFrameRivers", "splDataFrameHighways", "spNationalParks", "spMilitaryBases", "deviceWidth"))])
+rm(list=ls(all=TRUE))
 require(maps)
 require(maptools)
 require(sp)
@@ -12,27 +9,39 @@ require(colorspace)
 # require(classInt)
 require(fields)
 require(ggplot2)
+require(plyr)
 
-# deviceWidth <- 10 #20 #10 #6.5
+deviceWidth <- 10 #20 #10 #6.5
 # if( names(dev.cur()) != "null device" ) dev.off()
 # aspectRatio <- .5
 # deviceHeight <- deviceWidth * aspectRatio
 # windows(width=deviceWidth, height=deviceHeight)
 
 pathInputDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
-pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCounty.csv")
-pathInputSummaryCountyYear <- file.path(pathInputDirectory, "CountCountyYear.csv")
+pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
 
-dvName <- "Count"
-titleTopPlot <- "Raw Reports\n2002-2012"
-legendTopPlot <- "Count of Reports\n!!replicates not accounted for!!\n(Divided into Quartiles)"
 
-ds <- read.csv(pathInputSummaryCounty)
-stateMap <- map("county", "oklahoma", fill=TRUE, col="transparent", plot=FALSE)
-countyIDs <- seq_along(stateMap$names)
+dvName <- "CountPerCapita"
 
-sp <- map2SpatialPolygons(stateMap, IDs=countyIDs,  proj4string=CRS(" +proj=longlat +datum=NAD83 +ellps=GRS80 +towgs84=0,0,0"))
-sp <- SpatialPolygonsDataFrame(sp, data=ds)
+dsValue <- read.csv(pathInputSummaryCounty)
+dsValue <- data.frame(CountyName = tolower(dsValue$CountyName), DV=dsValue[, dvName])
+
+# stateMap <- map("county", "oklahoma", fill=TRUE,  plot=FALSE) #col="transparent",
+dsLocation <- map_data(map="county", region="OK")
+dsLocation$region <- dsLocation$subregion
+#dsLocation <- plyr::rename(dsLocation, replace=c(subregion="CountyName"))
+# dsLocation$ <- plyr::rename(dsLocation, replace=c(subregion="CountyName"))
+head(dsLocation)
+# countyIDs <- seq_along(unique(dsLocation$CountyName))#seq_along(dsLocation$CountyName)
+
+# sp <- map2SpatialPolygons(dsLocation, IDs=group,  proj4string=CRS(" +proj=longlat +datum=NAD83 +ellps=GRS80 +towgs84=0,0,0"))
+# # sp <- SpatialPolygonsDataFrame(sp, data=ds)
+# 
+# dsSp <- fortify(model=sp)
+# quantile(dsValue$DV)
+
+ggplot(dsValue, aes(map_id=CountyName)) + geom_map(aes(fill=DV), map=dsLocation) + expand_limits(x=dsLocation$long, y=dsLocation$lat) + coord_map()
+#ggplot(dsValue, aes(map_id = state)) + geom_map(aes(fill = Murder), map = dsLocation) + expand_limits(x = dsLocation$long, y = dsLocation$lat) + coord_map()
 
 labelCoordinates <- coordinates(sp)
 
