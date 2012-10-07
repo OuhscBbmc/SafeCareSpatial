@@ -8,7 +8,7 @@ require(colorspace)
 # require(classInt)
 require(fields)
 
-# deviceWidth <- 10 #20 #10 #6.5
+deviceWidth <- 10 #20 #10 #6.5
 # if( names(dev.cur()) != "null device" ) dev.off()
 # aspectRatio <- .5
 # deviceHeight <- deviceWidth * aspectRatio

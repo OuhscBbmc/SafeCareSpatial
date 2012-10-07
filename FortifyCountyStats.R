@@ -5,6 +5,7 @@ require(maptools)
 
 pathDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
 pathInputCensus <- file.path(pathDirectory, "PopByCounty-2012Aug.csv")
+pathInputCountyLookup <- file.path(pathDirectory, "CountyLookups.csv")
 pathInputSummaryCounty <- file.path(pathDirectory, "CountCounty.csv")
 pathInputSummaryCountyYear <- file.path(pathDirectory, "CountCountyYear.csv")
 pathOutputSummaryCounty <- file.path(pathDirectory, "CountCountyFortified.csv")
@@ -12,11 +13,15 @@ pathOutputSummaryCountyYear <- file.path(pathDirectory, "CountCountyYearFortifie
 
 #Read in the necessary data files
 dsCensus <- read.csv(pathInputCensus, stringsAsFactors=FALSE)
+dsLookup <- read.csv(pathInputCountyLookup, stringsAsFactor=F)
 dsCounty <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
 dsCountyYear <- read.csv(pathInputSummaryCountyYear, stringsAsFactors=FALSE)
 
 dsCensus <- dsCensus[, c("CountyName", "PopTotal")] #Drop the unnecessary columns
 
+################################################################################################
+### Work on dsCounty
+################################################################################################
 dsCounty <- merge(x=dsCounty, y=dsCensus, by="CountyName")
 dsCounty$CountPerCapita <- dsCounty$Count / dsCounty$PopTotal
 dsCounty$CountRank <- rank(dsCounty$Count)
@@ -27,17 +32,33 @@ dsCenterPoint <- map("county", "oklahoma", fill=TRUE, col="transparent", plot=FA
 # countyIDs <- seq_along(dsCenterPoint$names) # cbind(seq_along(dsCenterPoint$names), order(dsCenterPoint$names))
 countyIDs <- order(dsCenterPoint$names) #Using the 'order' fx accounts for the different alphabetical schemes
 spForCenters <- map2SpatialPolygons(dsCenterPoint, IDs=countyIDs,  proj4string=CRS(" +proj=longlat +datum=NAD83 +ellps=GRS80 +towgs84=0,0,0"))
-spForCenters <- SpatialPolygonsDataFrame(spForCenters, data=dsCensus)
+# spForCenters <- SpatialPolygonsDataFrame(spForCenters, data=dsCensus)
 labelCoordinates <- coordinates(spForCenters)
 labelCoordinates[which(dsCounty$CountyName=="Pottawatomie"), 2] <- coordinates(spForCenters)[which(dsCounty$CountyName=="Pottawatomie"), 2] + .1
 labelCoordinates[which(dsCounty$CountyName=="Love"), 2] <- coordinates(spForCenters)[which(dsCounty$CountyName=="Love"), 2] + .05
 colnames(labelCoordinates) <- c("LabelLongitude", "LabelLatitude")
-
+### TODO: pull out CountyIDs and merge properly
 dsCounty <- cbind(dsCounty, labelCoordinates)
 rm(labelCoordinates, spForCenters, dsCenterPoint)
-# dsCounty <- ddply(dsCounty, 
 
 # spFortified <- fortify(sp, region="ID")
 
+################################################################################################
+### Work on dsCountyYear
+################################################################################################
+years <- sort(unique(dsCountyYear$Year))
+
+dsCountyYearFortified <- data.frame(CountyID=integer(0), CountyName=character(0), Year=integer(0), Count=integer(0))
+for( year in years ) {
+  dsSlice <- dsCountyYear[dsCountyYear$Year==year, ]
+  dsSlice <- merge(x=dsLookup, y=dsSlice, by.x="ID", by.y="CountyID", all.x=TRUE, all.y=FALSE)
+  dsSlice$Count <- ifelse(is.na(dsSlice$Count), 0, dsSlice$Count)
+  dsSlice$CountyName <- dsSlice$Name
+  dsSlice$Year <- year #This fills in the NAs that exist in the county's without a report that year.
+  dsSlice <- plyr::rename(dsSlice, replace=c(ID="CountyID")) #Rename the ID column
+  dsSlice <- dsSlice[, colnames(dsSlice) != "Name"] #Drop the redundant (County)Name column.
+  dsCountyYearFortified <- rbind(dsCountyYearFortified, dsSlice)
+}
 
 write.csv(dsCounty, pathOutputSummaryCounty, row.names=FALSE)
+write.csv(dsCountyYearFortified, pathOutputSummaryCountyYear, row.names=FALSE)
