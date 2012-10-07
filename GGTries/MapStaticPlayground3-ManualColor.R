@@ -12,7 +12,7 @@ require(grid)
 require(ggplot2)
 require(plyr)
 
-# deviceWidth <- 10 #20 #10 #6.5
+deviceWidth <- 10 #20 #10 #6.5
 # if( names(dev.cur()) != "null device" ) dev.off()
 # aspectRatio <- .5
 # deviceHeight <- deviceWidth * aspectRatio
@@ -23,12 +23,35 @@ pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.cs
 
 # dvName <- "CountPerCapita"
 # roundedDigits <- 2
+# colorPower <- 1
 dvName <- "CountPerCapitaRank"
 roundedDigits <- 0
+colorPower <- 2
 
 dsValueAllVariables <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
 dsValue <- data.frame(CountyID=dsValueAllVariables$CountyID, CountyNameLower=tolower(dsValueAllVariables$CountyName), CountyName=dsValueAllVariables$CountyName, DV=dsValueAllVariables[, dvName], stringsAsFactors=FALSE)
-dsValue$ColorFill <- "tomato"
+
+
+breakPoints <- pretty(dsValue$DV, n=6)
+intervalCount <- length(breakPoints)-1
+highestFloor <- breakPoints[intervalCount]
+inHighestCategory <- (dsValue$DV > highestFloor)
+#paletteResource <- sequential_hcl(n=intervalCount, h=170, c. = c(80, 0), l = c(10, 98), power=1)
+paletteResource <- rev(sequential_hcl(n=intervalCount, h=340, c.=c(80, 0), l=c(40, 90), power=colorPower))
+
+DvInterval <- function( dv ) {
+  return( classIntervals(dv, n=intervalCount, style="fixed", fixedBreaks=breakPoints))  
+}
+ColorsContinuous <- function( dv ) {
+  return( findColours(DvInterval(dv), paletteResource) )
+}
+ContrastingColor <-function( color ){
+  lightness <- c(0.2, 0.6, 0) %*% col2rgb(color)/255
+  return( ifelse( lightness >= 0.4, "#0F0F0F", "#F0F0F0") )
+}
+dsValue$ColorFill <- ColorsContinuous(dsValue$DV)
+dsValue$ColorLabel <-t(ContrastingColor(dsValue$ColorFill))#[!inHighestCategory])) 
+  
 
 dsBoundary <- map_data(map="county", region="OK")
 dsBoundary$region <- dsBoundary$subregion
@@ -49,16 +72,19 @@ rm(labelCoordinates, spForCenters, dsCenterPoint)
 
 # spFortified <- fortify(sp, region="ID")
 
-g <- ggplot(dsValue, aes(map_id=CountyNameLower)) 
+g <- ggplot(dsValue, aes(map_id=CountyNameLower, color=ColorLabel)) 
 g <- g + geom_map(aes(fill=ColorFill), map=dsBoundary, color="gray20")
 # g <- g + geom_map(aes(fill=DV), map=dsBoundary, color="gray20")
 #g <- g + geom_text(aes(label=CountyName, x=long, y=lat)) 
-g <- g + geom_text(aes(label=CountyName, x=long, y=lat), vjust=-.2, size=4)
-g <- g + geom_text(aes(label=round(DV, roundedDigits), x=long, y=lat), vjust=1)
+g <- g + geom_text(aes(label=CountyName, x=long, y=lat), vjust=-.2, size=deviceWidth*.25)
+g <- g + geom_text(aes(label=round(DV, roundedDigits), x=long, y=lat), vjust=1, size=deviceWidth*.35)
 
 g <- g + expand_limits(x=dsBoundary$long, y=dsBoundary$lat) 
 # g <- g + scale_fill_gradient(name=dvName)
+g <- g + scale_fill_identity(name=dvName)
+g <- g + scale_color_identity()
 g <- g + coord_map()
+# g <- g + theme_bw(base_size=2)
 g <- g + theme(axis.text.x=element_blank(), axis.text.y=element_blank(), axis.title.x=element_blank(), axis.title.y=element_blank(), axis.ticks.length=unit(0, "cm"))# + theme(
 g <- g + theme(plot.background=element_blank(), panel.background=element_blank())
 g <- g + theme(legend.position=c(0,0), legend.justification=c("left","bottom"))

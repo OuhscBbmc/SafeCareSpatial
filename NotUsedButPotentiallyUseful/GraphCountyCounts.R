@@ -40,7 +40,7 @@ colorsQuantilesLabels <- gray(c(.4, .3, .2, 1))
 colorsContinuousLabels <- gray(c(rep(1, length=length(breaksDecile)-2), 0))
 
 colorsContinuous <- function( dv ) {
-  colorsContinuousPalette <- terrain_hcl(max(dv)-min(dv)+1, c = c(65, 0), l = c(45, 90), power = c(1/2, 20))
+  colorsContinuousPalette <- terrain_hcl(max(dv)-min(dv)+1, c=c(65,0), l=c(45,90), power=c(1/2, 20))
   return( colorsContinuousPalette[dv-min(dv)+1] )
 }
 
