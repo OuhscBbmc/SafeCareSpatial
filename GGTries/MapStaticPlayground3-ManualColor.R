@@ -28,6 +28,7 @@ roundedDigits <- 0
 
 dsValueAllVariables <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
 dsValue <- data.frame(CountyID=dsValueAllVariables$CountyID, CountyNameLower=tolower(dsValueAllVariables$CountyName), CountyName=dsValueAllVariables$CountyName, DV=dsValueAllVariables[, dvName], stringsAsFactors=FALSE)
+dsValue$ColorFill <- "tomato"
 
 dsBoundary <- map_data(map="county", region="OK")
 dsBoundary$region <- dsBoundary$subregion
@@ -49,13 +50,14 @@ rm(labelCoordinates, spForCenters, dsCenterPoint)
 # spFortified <- fortify(sp, region="ID")
 
 g <- ggplot(dsValue, aes(map_id=CountyNameLower)) 
-g <- g + geom_map(aes(fill=DV), map=dsBoundary, color="gray20")
+g <- g + geom_map(aes(fill=ColorFill), map=dsBoundary, color="gray20")
+# g <- g + geom_map(aes(fill=DV), map=dsBoundary, color="gray20")
 #g <- g + geom_text(aes(label=CountyName, x=long, y=lat)) 
 g <- g + geom_text(aes(label=CountyName, x=long, y=lat), vjust=-.2, size=4)
 g <- g + geom_text(aes(label=round(DV, roundedDigits), x=long, y=lat), vjust=1)
 
 g <- g + expand_limits(x=dsBoundary$long, y=dsBoundary$lat) 
-g <- g + scale_fill_gradient(name=dvName)
+# g <- g + scale_fill_gradient(name=dvName)
 g <- g + coord_map()
 g <- g + theme(axis.text.x=element_blank(), axis.text.y=element_blank(), axis.title.x=element_blank(), axis.title.y=element_blank(), axis.ticks.length=unit(0, "cm"))# + theme(
 g <- g + theme(plot.background=element_blank(), panel.background=element_blank())
