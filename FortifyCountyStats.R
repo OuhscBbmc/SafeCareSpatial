@@ -18,14 +18,15 @@ dsCounty <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
 dsCountyYear <- read.csv(pathInputSummaryCountyYear, stringsAsFactors=FALSE)
 
 dsCensus <- dsCensus[, c("CountyName", "PopTotal")] #Drop the unnecessary columns
-
+years <- sort(unique(dsCountyYear$Year))
+yearCount <- length(years)
 ################################################################################################
 ### Work on dsCounty
 ################################################################################################
 dsCounty <- merge(x=dsCounty, y=dsCensus, by="CountyName")
-dsCounty$CountPerCapita <- dsCounty$Count / dsCounty$PopTotal
+dsCounty$CountPerCapitaAnnual <- (dsCounty$Count / dsCounty$PopTotal) / yearCount
 dsCounty$CountRank <- rank(dsCounty$Count)
-dsCounty$CountPerCapitaRank <- rank(dsCounty$CountPerCapita)
+dsCounty$CountPerCapitaRank <- rank(dsCounty$CountPerCapitaAnnual)
 
 ## Indicate a point to label each county
 dsCenterPoint <- map("county", "oklahoma", fill=TRUE, col="transparent", plot=FALSE)
@@ -39,14 +40,14 @@ labelCoordinates[which(dsCounty$CountyName=="Love"), 2] <- coordinates(spForCent
 colnames(labelCoordinates) <- c("LabelLongitude", "LabelLatitude")
 ### TODO: pull out CountyIDs and merge properly
 dsCounty <- cbind(dsCounty, labelCoordinates)
-rm(labelCoordinates, spForCenters, dsCenterPoint)
+# rm(labelCoordinates, spForCenters, dsCenterPoint)
 
 # spFortified <- fortify(sp, region="ID")
 
 ################################################################################################
 ### Work on dsCountyYear
 ################################################################################################
-years <- sort(unique(dsCountyYear$Year))
+
 
 dsCountyYearFortified <- data.frame(CountyID=integer(0), CountyName=character(0), Year=integer(0), Count=integer(0),
   LabelLongitude=numeric(0), LabelLatitude=numeric(0))
@@ -58,10 +59,17 @@ for( year in years ) {
   dsSlice$Year <- year #This fills in the NAs that exist in the county's without a report that year.
   dsSlice <- plyr::rename(dsSlice, replace=c(ID="CountyID")) #Rename the ID column
   dsSlice <- dsSlice[, colnames(dsSlice) != "Name"] #Drop the redundant (County)Name column.
-  dsSlice$LabelLongitude <- 0
-  dsSlice$LabelLatitude <- 0
+#   dsSlice$LabelLongitude <- 0
+#   dsSlice$LabelLatitude <- 0
+  
+  dsSlice <- cbind(dsSlice, labelCoordinates)
   dsCountyYearFortified <- rbind(dsCountyYearFortified, dsSlice)
 }
+
+dsCountyYearFortified <- merge(x=dsCountyYearFortified, y=dsCensus, by="CountyName")
+dsCountyYearFortified$CountPerCapitaAnnual <- dsCountyYearFortified$Count / dsCountyYearFortified$PopTotal
+dsCountyYearFortified$CountRank <- rank(dsCountyYearFortified$Count)
+dsCountyYearFortified$CountPerCapitaRank <- rank(dsCountyYearFortified$CountPerCapitaAnnual)
 
 write.csv(dsCounty, pathOutputSummaryCounty, row.names=FALSE)
 write.csv(dsCountyYearFortified, pathOutputSummaryCountyYear, row.names=FALSE)

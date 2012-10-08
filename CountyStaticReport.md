@@ -17,12 +17,12 @@ dsValueAllVariables <- read.csv(pathInputSummaryCounty, stringsAsFactors = FALSE
 
 
 ```r
-dvName <- "CountPerCapita"  #The number of victims per county population; darker counties have more victims, adjusted for pop
+dvName <- "CountPerCapitaAnnual"  #The number of victims per county population; darker counties have more victims, adjusted for pop
 dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
 # dsValueAllVariables$DVLabel <- round(dsValueAllVariables$DV, 2) #Keeps
 # leading zeros
 dsValueAllVariables$DVLabel <- gsub("^0.", ".", round(dsValueAllVariables$DV, 
-    2))  #Remove leading zeros.
+    3))  #Remove leading zeros.
 MapCounties(dsValueAllVariables, deviceWidth = 14)
 ```
 
