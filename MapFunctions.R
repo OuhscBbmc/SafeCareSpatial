@@ -15,8 +15,9 @@ require(plyr)
 
 
 
-MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues=TRUE, mapTitle=""
-                         ) {
+MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues=TRUE, mapTitle="",
+  dvFloor=min(dsValue$DV), dvCeiling=max(dsValuePlot$DV)                     ) {
+  
   dsValuePlot <- data.frame(
     CountyID=dsValue$CountyID, 
     CountyNameLower=tolower(dsValue$CountyName), 
@@ -30,7 +31,7 @@ MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues
   
   intervalCount <- 3
   #breakPoints <- pretty(dsValuePlot$DV, n=intervalCount)
-  breakPoints <- seq(from=min(dsValuePlot$DV),to=max(dsValuePlot$DV), length.out=intervalCount+1)
+  breakPoints <- seq(from=dvFloor,to=dvCeiling, length.out=intervalCount+1)
   
   # highestFloor <- breakPoints[intervalCount]
   # inHighestCategory <- (dsValuePlot$DV > highestFloor)
@@ -69,16 +70,16 @@ MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues
   g <- g + theme(plot.background=element_blank(), panel.background=element_blank())
   g <- g + theme(legend.position=c(0,0), legend.justification=c("left","bottom"))
   g <- g + theme(plot.margin=unit(c(0, 0, 0, 0), "cm")) #+ theme(panel.margin = unit(c(0, 0, 0, 0), "cm"))
-  g <- g + annotate("text", x=-102, y=36.2, label=mapTitle, hjust=.5, vjust=0, size=deviceWidth*.8)
+  g <- g + annotate("text", x=-102, y=36.2, label=mapTitle, hjust=.5, vjust=0, size=deviceWidth*.7)
   return( g )
 }
 
-# rm(list=ls(all=TRUE))
+# # rm(list=ls(all=TRUE))
 # pathInputDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
 # pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
 # 
-# dvName <- "CountPerCapita"
-# roundedDigits <- 2
+# dvName <- "CountPerCapitaAnnual"
+# roundedDigits <- 3
 # colorPower <- 1
 # # dvName <- "CountPerCapitaRank"
 # # roundedDigits <- 0
@@ -86,13 +87,14 @@ MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues
 # 
 # dsValueAllVariables <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
 # dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
-# dsValueAllVariables$DVLabel <- round(dsValueAllVariables$DV, roundedDigits)
+# dsValueAllVariables$DVLabel <- gsub("^0.", ".",round(dsValueAllVariables$DV,roundedDigits)) #Remove leading zeros.
+# 
 # rm(pathInputDirectory, pathInputSummaryCounty, roundedDigits)
 # 
 # deviceWidth <- 10 #20 #10 #6.5
-# if( names(dev.cur()) != "null device" ) dev.off()
-# aspectRatio <- .5
-# deviceHeight <- deviceWidth * aspectRatio
-# windows(width=deviceWidth, height=deviceHeight)
+# # if( names(dev.cur()) != "null device" ) dev.off()
+# # aspectRatio <- .5
+# # deviceHeight <- deviceWidth * aspectRatio
+# # windows(width=deviceWidth, height=deviceHeight)
 # 
 # MapCounties(dsValue=dsValueAllVariables, mapTitle=dvName)

@@ -1,4 +1,5 @@
-#https://github.com/hadley/ggplot2/wiki/Using-ggplot2-animations-to-demonstrate-several-parallel-numerical-experiments-in-a-single-layout
+#http://blogs.luc.edu/rwill5/2012/01/29/experimenting-with-maps-in-r/
+
 rm(list=ls(all=TRUE)) #Clear variables
 require(ggplot2)
 require(animation)
@@ -24,26 +25,11 @@ ds$DVLabel <- gsub("^0.", ".",round(ds$DV,3)) #Remove leading zeros.
 # dvName <- "CountPerCapitaRank" #The county's rank for the number of victims per county population; darker counties have more victims, adjusted for pop
 # ds$DV <- ds[, dvName]
 # ds$DVLabel <- ds$DV
-dvFloor <- min(ds$DV)
-dvCeiling <- max(ds$DV)
 
-source(pathInputMappingCode)
+# dvFloor <- min(ds$DV)
+# dvCeiling <- max(ds$DV)
 
-years <- sort(unique(ds$Year))
-intervals <- rep(1, length(years))
-intervals[1] <- 4
-intervals[length(intervals)] <- 4
-# saveMovie({
-s <- saveGIF({
-  for( year in years ) {
-    dsSlice <- ds[ds$Year==year, ]
-    
-    title <- paste(dvName, year)
-    g <- MapCounties(dsValue=dsSlice, deviceWidth=14, showCountyValues=T, mapTitle=title,
-                     dvFloor=dvFloor, dvCeiling=dvCeiling)
-    print(g)
-  }
-}, movie.name=paste0(dvName, ".gif"), outdir=pathDirectoryImages, interval=intervals,ani.width=1600, ani.height=800)
-# ggsave(filename=file.path(pathDirectoryCode, "Animated.png"), plot=g)
-ss <- strsplit(s, split=" ")
-ss[[length(ss)]][length(ss[[1]])]
+g <- ggplot(ds, aes(x=Year, y=DV, group=CountyID, color=factor(CountyID)))
+g <- g + geom_line(stat="identity")
+g <- g + 
+g
