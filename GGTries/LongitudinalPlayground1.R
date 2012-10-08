@@ -28,7 +28,7 @@ ds <- read.csv(pathInputSummaryCountyYear, stringsAsFactors=FALSE)
 
 dvName <- "CountPerCapitaAnnual" #The number of victims per county population; darker counties have more victims, adjusted for pop
 ds$DV <- ds[, dvName]
-ds$DVLabel <- gsub("^0.", ".",round(ds$DV,3)) #Remove leading zeros.
+ds$DVLabel <- gsub("^0.", ".", round(ds$DV,3)) #Remove leading zeros.
 
 # dvName <- "CountPerCapitaRank" #The county's rank for the number of victims per county population; darker counties have more victims, adjusted for pop
 # ds$DV <- ds[, dvName]
@@ -36,8 +36,10 @@ ds$DVLabel <- gsub("^0.", ".",round(ds$DV,3)) #Remove leading zeros.
 
 # dvFloor <- min(ds$DV)
 # dvCeiling <- max(ds$DV)
+pretendYear <- 2005
 
 g <- ggplot(ds, aes(x=Year, y=DV, group=CountyID, color=factor(CountyID)))
+# g <- g + geom_vline(xintercept = pretendYear)
 g <- g + geom_line(stat="identity")
 g <- g + geom_smooth(aes(x=Year, y=DV, group=NA), size=2)
 g <- g + scale_y_continuous(name=dvName)

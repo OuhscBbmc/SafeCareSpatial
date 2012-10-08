@@ -11,14 +11,16 @@ require(lubridate) #For dealing with dates
 # workers <- makeCluster(4) #4 threads
 # registerDoParallel(workers)
 
+pathReadonlyDatasets <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/SafeCareCostEffectiveness/ReadonlyDatabases"
 pathWorkingDatasets <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/SafeCareCostEffectiveness/WorkingDatasets"
 # pathWorkingDatasets <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
 pathOutputVictim <- file.path(pathWorkingDatasets, "Victim.csv")
 pathOutputSummaryCounty <- file.path(pathWorkingDatasets, "CountCounty.csv")
 pathOutputSummaryCountyYear <- file.path(pathWorkingDatasets, "CountCountyYear.csv")
 
-#pathCountyLookupTable <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/LookupTables/CountyLookups.csv"
-pathCountyLookupTable <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/SafeCareCostEffectiveness/ReadonlyDatabases/CountyLookups.csv"
+# pathOcs2000 <- file.path(pathReadonlyDatasets, "KIDS07_Backup.accdb")
+pathKids07 <- file.path(pathReadonlyDatasets, "KIDS07_Backup.accdb")
+pathCountyLookupTable <- file.path(pathReadonlyDatasets, "CountyLookups.csv")
 
 msurTableNames <- c("MSUR 06-02","MSUR 06-03","MSUR 06-04","MSUR 06-05","MSUR 06-06","MSUR 06-07","MSUR 06-08","MSUR 06-09","MSUR 06-10","MSUR 06-11","MSUR 06-12")
 msurYear <- 2002 + seq_along(msurTableNames) - 1 
@@ -58,7 +60,8 @@ dsMsur$CountyID <- as.integer(gsub(pattern=regexPattern, replacement="", x=dsMsu
 dsMsur <- dsMsur[, !(colnames(dsMsur) %in% c("County"))] #Drop the dirty county variable.
 
 startTime <- Sys.time()
-channelKids07 <- odbcConnect(dsn="SafeCareKids07")
+# channelKids07 <- odbcConnect(dsn="SafeCareKids07")
+channelKids07 <- odbcConnectAccess2007(pathKids07)
 # dsReferral <- sqlFetch(channelKids07, "Chrefer")
 # dsAllegation <- sqlFetch(channelKids07, "Challeg")
 dsReferral <- sqlQuery(channelKids07, query="SELECT ReferId, CaseId, ReferDt, CmpltDt, ReferTyp FROM Chrefer")
