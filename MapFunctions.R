@@ -15,7 +15,7 @@ require(plyr)
 
 
 
-MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues=TRUE ) {
+MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues=TRUE, mapTitle="" ) {
   dsValuePlot <- data.frame(
     CountyID=dsValue$CountyID, 
     CountyNameLower=tolower(dsValue$CountyName), 
@@ -68,29 +68,30 @@ MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues
   g <- g + theme(plot.background=element_blank(), panel.background=element_blank())
   g <- g + theme(legend.position=c(0,0), legend.justification=c("left","bottom"))
   g <- g + theme(plot.margin=unit(c(0, 0, 0, 0), "cm")) #+ theme(panel.margin = unit(c(0, 0, 0, 0), "cm"))
+  g <- g + annotate("text", x=-102, y=36.2, label=mapTitle, hjust=.5, vjust=0, size=deviceWidth*.8)
   return( g )
 }
 
 # rm(list=ls(all=TRUE))
-# pathInputDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
-# pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
-# 
-# dvName <- "CountPerCapita"
-# roundedDigits <- 2
-# colorPower <- 1
-# # dvName <- "CountPerCapitaRank"
-# # roundedDigits <- 0
-# # colorPower <- 2
-# 
-# dsValueAllVariables <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
-# dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
-# dsValueAllVariables$DVLabel <- round(dsValueAllVariables$DV, roundedDigits)
-# rm(pathInputDirectory, pathInputSummaryCounty, roundedDigits)
-# 
-# # deviceWidth <- 10 #20 #10 #6.5
-# # if( names(dev.cur()) != "null device" ) dev.off()
-# # aspectRatio <- .5
-# # deviceHeight <- deviceWidth * aspectRatio
-# # windows(width=deviceWidth, height=deviceHeight)
-# 
-# MapCounties(dsValue=dsValueAllVariables)
+pathInputDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
+pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
+
+dvName <- "CountPerCapita"
+roundedDigits <- 2
+colorPower <- 1
+# dvName <- "CountPerCapitaRank"
+# roundedDigits <- 0
+# colorPower <- 2
+
+dsValueAllVariables <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
+dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
+dsValueAllVariables$DVLabel <- round(dsValueAllVariables$DV, roundedDigits)
+rm(pathInputDirectory, pathInputSummaryCounty, roundedDigits)
+
+deviceWidth <- 10 #20 #10 #6.5
+if( names(dev.cur()) != "null device" ) dev.off()
+aspectRatio <- .5
+deviceHeight <- deviceWidth * aspectRatio
+windows(width=deviceWidth, height=deviceHeight)
+
+MapCounties(dsValue=dsValueAllVariables, mapTitle=dvName)
