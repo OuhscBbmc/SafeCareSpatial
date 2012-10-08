@@ -8,7 +8,7 @@ This project is part of our larger effort to learn more about this behavioral pa
 Several R Packages need to be installed to perfom all the analyses in this repository.  If you're a beginner, paste the following code into the R or RStudio console.  Create a new personal library if it prompts you.  The list of packages will grow as we develop the reports.  Help keep the list updated.
  `install.packages(c("knitr", "ggplot2", "RODBC", "lubridate", 
  "reshape2", "stringr", "devtools", "colorspace", "sp", "spdep",
- "doParallel", "maptools"), dependencies=TRUE)`.  
+ "doParallel", "maptools", "animation"), dependencies=TRUE)`.  
 
 #### Links
 [CCAN - Center for Child Abuse and Neglect](http://www.oumedicine.com/pediatrics/department-sections/developmental-behavioral-pediatrics/center-on-child-abuse-and-neglect/research/child-welfare-services-research/oklahoma-children's-services-evaluation) in the Pediatrics Dept of the [Univeristy of Oklahoma Health Sciences Center](http://ouhsc.edu/)
