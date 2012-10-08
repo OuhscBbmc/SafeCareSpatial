@@ -55,6 +55,7 @@ CollapseAllegations <- function( df ) {
     SexualAbuse=any(df$SexAbFlg=="Y")
   ))
 }
+### TODO: don't mapreduce on any variable
 dsAllegationByVictimAndReferral <- ddply(dsAllegation, .variables=c("ReferralID", "VictimID"), CollapseAllegations, .parallel=FALSE)
 Sys.time() - startTime #Serial: 2.664216 mins
 
