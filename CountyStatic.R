@@ -1,10 +1,6 @@
 #http://blogs.luc.edu/rwill5/2012/01/29/experimenting-with-maps-in-r/
 
 rm(list=ls(all=TRUE))
-
-
-
-
 require(maps)
 require(maptools)
 # require(sp)
