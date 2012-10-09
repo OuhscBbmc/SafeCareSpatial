@@ -5,7 +5,6 @@ require(ggplot2)
 require(plyr)
 # require(animation)
 
-
 pathDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial"
 # pathDirectory <- "C:/Users/wbeasley/Documents/SafeCare/SafeCareSpatial"
 pathDirectoryData <- file.path(pathDirectory, "PhiFreeDatasets")
@@ -35,19 +34,15 @@ deviceWidth <- 10 #20 #10 #6.5
 
 # dvName <- "Count" #The county's rank for the number of victims per county population; darker counties have more total victims
 # dsCounty$DV <- dsCounty[, dvName]
-# dsCounty$DVLabel <- scales::comma(dsCounty$DV)
 
 dvName <- "CountPerCapitaAnnual" #The number of victims per county population; darker counties have more victims, adjusted for pop
 dsState$DV <- dsState[, dvName]
 dsCounty$DV <- dsCounty[, dvName]
-dsCounty$DVLabel <- gsub("^0.", ".", round(dsCounty$DV,3)) #Remove leading zeros.
 
 # dvName <- "CountPerCapitaRank" #The county's rank for the number of victims per county population; darker counties have more victims, adjusted for pop
 # dsCounty$DV <- dsCounty[, dvName]
 # dsCounty$DVLabel <- dsCounty$DV
 
-# dvFloor <- min(dsCounty$DV)
-# dvCeiling <- max(dsCounty$DV)
 pretendYear <- 2005
 
 g <- ggplot(dsCounty, aes(x=ReferralYear, y=DV, ymin=0, group=CountyID, color=factor(CountyID)))
