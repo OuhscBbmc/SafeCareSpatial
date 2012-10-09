@@ -113,13 +113,9 @@ dsMsur$CountyID <- as.integer(gsub(pattern=regexPattern, replacement="", x=dsMsu
 dsMsur <- dsMsur[, !(colnames(dsMsur) %in% c("County"))] #Drop the dirty county variable.
 dsMsur <- merge(x=dsMsur, y=dsCountyNames, by.x="CountyID", by.y="ID")
 
-# CollapseMsur <- function( df ) {
-#   with(df, data.frame(     
-#   ))
-# }
 startTime <- Sys.time()
-dsMsurCollapsed <- ddply(dsMsur, "KK", subset, order(DateFind)==1) #Should this be rank?
-# dsMsurCollapsed <- ddply(dsMsur, "KK", subset, rank(DateFind)==1)
+# dsMsurCollapsed <- ddply(dsMsur, "KK", subset, order(DateFind)==1) #Should this be rank?
+dsMsurCollapsed <- ddply(dsMsur, "KK", subset, rank(DateFind)==1)
 Sys.time() - startTime #20.0166 secs
 
 ds <- merge(x=ds, y=dsMsurCollapsed, by="KK", all.x=TRUE, all.y=FALSE)
