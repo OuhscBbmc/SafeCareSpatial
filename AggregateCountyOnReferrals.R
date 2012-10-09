@@ -93,7 +93,7 @@ for( tableID in seq_along(msurTableNames) ) {
   dsMsur <- rbind(dsMsur, dsMsurYear[, desiredMsurColumns])
 }
 odbcClose(channelOcs2000)
-rm(dsMsurYear)
+# rm(dsMsurYear)
 dsMsur <- plyr::rename(dsMsur, replace=c(county="County", dateFIND="DateFind"))
 dsMsur <- dsMsur[!is.na(dsMsur$County), ] #Drop the cases with missing counties.
 # dsMsur <- dsMsur[!is.na(dsMsur$DateFind), ] #Drop the missing dates.
@@ -110,15 +110,37 @@ regexPattern <- "[a-z A-Z]"
 dsMsur$CountyID <- as.integer(gsub(pattern=regexPattern, replacement="", x=dsMsur$County))
 # sort(unique(dsMsur$CountyID))
 # class(dsMsur$CountyID)
-dsMsur <- dsMsur[, !(colnames(dsMsur) %in% c("County"))] #Drop the dirty county variable.
+dsMsur <- dsMsur[, colnames(dsMsur) != "County"] #Drop the dirty county variable.
 dsMsur <- merge(x=dsMsur, y=dsCountyNames, by.x="CountyID", by.y="ID")
 
-startTime <- Sys.time()
-# dsMsurCollapsed <- ddply(dsMsur, "KK", subset, order(DateFind)==1) #Should this be rank?
-dsMsurCollapsed <- ddply(dsMsur, "KK", subset, rank(DateFind)==1)
-Sys.time() - startTime #20.0166 secs
+# sum(is.na(ds$KK))
+# sum(is.na(ds$ReferralYear))
+# sum(is.na(dsMsur$KK))
+# sum(is.na(dsMsur$MsurYear))
+sum(is.na(dsMsur$CountyName))
+ds$Year <- ds$ReferralYear
+dsMsur$Year <- dsMsur$MsurYear
+ds <- ds[ order(ds$KK, ds$ReferralYear), ]
+# ds <- plyr::join(x=ds, y=dsMsur, by=c("KK", "Year"), type="left", match="first") #115167 missing rows
+ds <- plyr::join(x=ds, y=dsMsur, by=c("KK"), type="left", match="first") #Only 580 missing rows
+ds <- ds[, (colnames(ds) !="Year")]
+dsMsur <- dsMsur[, (colnames(dsMsur) !="Year")]
+# sum(is.na(ds$CountyName))
 
-ds <- merge(x=ds, y=dsMsurCollapsed, by="KK", all.x=TRUE, all.y=FALSE)
+
+# dsMsurCollapsed <- ddply(dsMsur, "KK", subset, rank(DateFind)==1)
+# dsTest <- merge(x=ds, y=dsMsurCollapsed, 
+#                 by.x=c("KK", "ReferralYear"), all.x=TRUE, 
+#                 by.y=c("KK", "MsurYear"), all.y=FALSE)
+# dsTest <- dsTest[ order(dsTest$KK, v$ReferralYear), ]
+
+
+# startTime <- Sys.time()
+# # dsMsurCollapsed <- ddply(dsMsur, "KK", subset, order(DateFind)==1) #Should this be rank?
+# dsMsurCollapsed <- ddply(dsMsur, "KK", subset, rank(DateFind)==1)
+# Sys.time() - startTime #20.0166 secs
+# 
+# ds <- merge(x=ds, y=dsMsurCollapsed, by="KK", all.x=TRUE, all.y=FALSE)
 
 #variablesToDrop <- c("CmpltDt", "MsurSource", "DateFind")
 variablesToDrop <- c("KK","ReferralID","VictimID", "MsurSource", "MsurYear", "DateFind", "ReferralMonth")
