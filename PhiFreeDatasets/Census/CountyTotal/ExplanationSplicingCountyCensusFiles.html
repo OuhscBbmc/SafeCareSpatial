@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>Creating <code>OklahomaCountyPopulationsByYear.csv</code></title>
+
+<base target="_blank"/>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h2>Creating <code>OklahomaCountyPopulationsByYear.csv</code></h2>
+
+<ol>
+<li>Go to <a href="http://www.census.gov/popest/data/counties/totals/2011/CO-EST2011-01.html">http://www.census.gov/popest/data/counties/totals/2011/CO-EST2011-01.html</a> and <a href="http://www.census.gov/popest/data/counties/totals/2009/CO-EST2009-01.html">http://www.census.gov/popest/data/counties/totals/2009/CO-EST2009-01.html</a> (also see <a href="http://www.census.gov/popest/data/historical/2000s/index.html">http://www.census.gov/popest/data/historical/2000s/index.html</a> and <a href="http://www.census.gov/popest/data/historical/index.html">http://www.census.gov/popest/data/historical/index.html</a>).</li>
+<li>Download the appropriate oklahoma files (here, I atypically preferred the Excel version).</li>
+<li>Ignoring fluff, pull out the 2011 &amp; 2010 columns from the first file &amp; 2009-2000 from the second file. </li>
+<li>Paste them in the same Excel document and save as a CSV.</li>
+<li>In Excel, change the cell formatting to remove the commas</li>
+<li>In Excel, delete a bunch of column to the right of the data</li>
+<li>In Notepadd++, Find&amp;Replace the leading period and the phrase &ldquo; County&rdquo;.  Replace them with &ldquo;&rdquo;.</li>
+<li>Melt the &#39;wide&#39; dataset into a &#39;long&#39; format, so it can be retrieved more easily.</li>
+<li>Copy the file to a few directories higher, into <code>PhiFreeDatasets</code>.</li>
+</ol>
+
+<p><strong>Notes from the 2011 Census file:</strong><br/>
+Note: The April 1, 2010 Population Estimates base reflects changes to the Census 2010 population from the Boundary and Annexation Survey (BAS) and other geographic program revisions.  It does not reflect changes from the Count Question Resolution program.  All geographic boundaries for the 2011 population estimates series are defined as of January 1, 2011.<br/><br/>
+Suggested Citation:<br/>
+Table 1. Annual Estimates of the Resident Population for Counties of Oklahoma: April 1, 2010 to July 1, 2011 (CO-EST2011-01-40)<br/>
+Source: U.S. Census Bureau, Population Division<br/>
+Release Date: April 2012                </p>
+
+<p><strong>Notes from the 2009 Census file:</strong><br/>
+Note: The April 1, 2000 estimates base reflects changes to the Census 2000 population resulting from legal boundary updates, other geographic program changes, and Count Question Resolution actions.  All geographic boundaries for the 2009 population estimates series are defined as of January 1, 2009.<br/><br/>
+Suggested Citation:<br/>
+Table 1. Annual Estimates of the Resident Population for Counties of Oklahoma: April 1, 2000 to July 1, 2009 (CO-EST2009-01-40)<br/>
+Source: U.S. Census Bureau, Population Division<br/>
+Release Date: March 2010</p>
+
+</body>
+
+</html>
+
