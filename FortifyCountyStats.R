@@ -11,6 +11,7 @@ pathInputSummaryCounty <- file.path(pathDirectory, "CountCounty.csv")
 pathInputSummaryCountyYear <- file.path(pathDirectory, "CountCountyYear.csv")
 pathOutputSummaryCounty <- file.path(pathDirectory, "CountCountyFortified.csv")
 pathOutputSummaryCountyYear <- file.path(pathDirectory, "CountCountyYearFortified.csv")
+pathOutputStateYear <- file.path(pathDirectory, "CountStateYearFortified.csv")
 
 #Read in the necessary data files
 dsCensus2012 <- read.csv(pathInputCensus2012, stringsAsFactors=FALSE)
@@ -49,8 +50,6 @@ dsCounty <- cbind(dsCounty, labelCoordinates)
 ################################################################################################
 ### Work on dsCountyYear
 ################################################################################################
-
-
 dsCountyYearFortified <- data.frame(CountyID=integer(0), CountyName=character(0), Year=integer(0), Count=integer(0),
   LabelLongitude=numeric(0), LabelLatitude=numeric(0))
 for( year in years ) {
@@ -77,5 +76,15 @@ dsCountyYearFortified$CountPerCapitaAnnual <- dsCountyYearFortified$Count / dsCo
 dsCountyYearFortified$CountRank <- rank(dsCountyYearFortified$Count)
 dsCountyYearFortified$CountPerCapitaRank <- rank(dsCountyYearFortified$CountPerCapitaAnnual)
 
+################################################################################################
+### Work on dsStateYear
+################################################################################################
+StateSummarizing <- function( df ) {
+  return( data.frame(Count=sum(df$Count), PopTotal=sum(df$PopTotal)) )
+}
+dsState <- ddply(dsCountyYearFortified, "MsurYear", StateSummarizing)
+dsState$CountPerCapitaAnnual <- dsState$Count / dsState$PopTotal
+
+write.csv(dsState, pathOutputStateYear, row.names=FALSE)
 write.csv(dsCounty, pathOutputSummaryCounty, row.names=FALSE)
 write.csv(dsCountyYearFortified, pathOutputSummaryCountyYear, row.names=FALSE)
