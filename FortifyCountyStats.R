@@ -18,7 +18,7 @@ dsCounty <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
 dsCountyYear <- read.csv(pathInputSummaryCountyYear, stringsAsFactors=FALSE)
 
 dsCensus <- dsCensus[, c("CountyName", "PopTotal")] #Drop the unnecessary columns
-years <- sort(unique(dsCountyYear$Year))
+years <- sort(unique(dsCountyYear$MsurYear))
 yearCount <- length(years)
 ################################################################################################
 ### Work on dsCounty
@@ -52,11 +52,11 @@ dsCounty <- cbind(dsCounty, labelCoordinates)
 dsCountyYearFortified <- data.frame(CountyID=integer(0), CountyName=character(0), Year=integer(0), Count=integer(0),
   LabelLongitude=numeric(0), LabelLatitude=numeric(0))
 for( year in years ) {
-  dsSlice <- dsCountyYear[dsCountyYear$Year==year, ]
+  dsSlice <- dsCountyYear[dsCountyYear$MsurYear==year, ]
   dsSlice <- merge(x=dsLookup, y=dsSlice, by.x="ID", by.y="CountyID", all.x=TRUE, all.y=FALSE)
   dsSlice$Count <- ifelse(is.na(dsSlice$Count), 0, dsSlice$Count)
   dsSlice$CountyName <- dsSlice$Name
-  dsSlice$Year <- year #This fills in the NAs that exist in the county's without a report that year.
+  dsSlice$MsurYear <- year #This fills in the NAs that exist in the county's without a report that year.
   dsSlice <- plyr::rename(dsSlice, replace=c(ID="CountyID")) #Rename the ID column
   dsSlice <- dsSlice[, colnames(dsSlice) != "Name"] #Drop the redundant (County)Name column.
 #   dsSlice$LabelLongitude <- 0
