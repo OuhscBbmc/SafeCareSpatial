@@ -35,6 +35,7 @@ Sys.time() - startTime
 # rm(dsReferral)
 
 dsReferral <- plyr::rename(dsReferral, replace=c(ReferId="ReferralID", CaseId="KK", ReferDt="ReferralDate"))
+dsReferral$ReferralYear <- as.integer(year(dsReferral$ReferralDate))
 dsReferral$ReferralMonth <- as.Date(ISOdate(year(dsReferral$ReferralDate), month(dsReferral$ReferralDate), 15))
 dsReferral <- dsReferral[, colnames(dsReferral) !="ReferralDate"]
 
@@ -124,14 +125,14 @@ Sys.time() - startTime #20.0166 secs
 ds <- merge(x=ds, y=dsMsurCollapsed, by="KK", all.x=TRUE, all.y=FALSE)
 
 #variablesToDrop <- c("CmpltDt", "MsurSource", "DateFind")
-variablesToDrop <- c("KK","ReferralID","VictimID", "MsurSource", "DateFind")
+variablesToDrop <- c("KK","ReferralID","VictimID", "MsurSource", "MsurYear", "DateFind", "ReferralMonth")
 ds <- ds[, !(colnames(ds) %in% variablesToDrop)]
 
 class(ds$CountyName)
 ds$CountyName <- as.character(ds$CountyName)
 
 dsSummaryCounty <- count(ds, c("CountyID", "CountyName"))
-dsSummaryCountyYear <- count(ds, c("CountyID", "CountyName", "MsurYear"))
+dsSummaryCountyYear <- count(ds, c("CountyID", "CountyName", "ReferralYear"))
 dsSummaryCountyType <- count(ds, c("CountyID", "CountyName", "Abuse", "Neglect", "SexualAbuse"))
 
 
