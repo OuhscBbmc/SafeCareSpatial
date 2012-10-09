@@ -21,10 +21,10 @@ pathOutputAnimation <- file.path(pathDirectoryCode, "MapAnimation.gif")
 dsCounty <- read.csv(pathInputSummaryCountyYear, stringsAsFactors=FALSE)
 dsState <- read.csv(pathInputSummaryStateYear, stringsAsFactors=FALSE)
 
-#years <- sort(unique(dsCounty$MsurYear))
+#years <- sort(unique(dsCounty$ReferralYear))
 years <- 2002:2011
-dsCounty <- dsCounty[dsCounty$MsurYear %in% years, ]
-dsState <- dsState[dsState$MsurYear %in% years, ]
+dsCounty <- dsCounty[dsCounty$ReferralYear %in% years, ]
+dsState <- dsState[dsState$ReferralYear %in% years, ]
 
                  
 deviceWidth <- 10 #20 #10 #6.5
@@ -50,12 +50,12 @@ dsCounty$DVLabel <- gsub("^0.", ".", round(dsCounty$DV,3)) #Remove leading zeros
 # dvCeiling <- max(dsCounty$DV)
 pretendYear <- 2005
 
-g <- ggplot(dsCounty, aes(x=MsurYear, y=DV, ymin=0, group=CountyID, color=factor(CountyID)))
+g <- ggplot(dsCounty, aes(x=ReferralYear, y=DV, ymin=0, group=CountyID, color=factor(CountyID)))
 # g <- g + geom_vline(xintercept = pretendYear, alpha=.2, size=30)
 g <- g + geom_line(stat="identity")
-g <- g + geom_line(data=dsState, aes(x=MsurYear, y=DV, group=NA, color=NA), stat="identity", size=1, color="black")
-g <- g + geom_smooth(data=dsState, aes(x=MsurYear, y=DV, group=NA, color=NA), method="loess", size=3)
-g <- g + geom_text(data=dsCounty[dsCounty$DV >.02, ], aes(x=MsurYear,label=CountyName), vjust=1, size=4)
+g <- g + geom_line(data=dsState, aes(x=ReferralYear, y=DV, group=NA, color=NA), stat="identity", size=1, color="black")
+g <- g + geom_smooth(data=dsState, aes(x=ReferralYear, y=DV, group=NA, color=NA), method="loess", size=3)
+g <- g + geom_text(data=dsCounty[dsCounty$DV >.015, ], aes(x=ReferralYear,label=CountyName), vjust=1, size=4)
 
 g <- g + scale_x_continuous(name="", breaks=years)
 g <- g + scale_y_continuous(name=dvName, limits=c(0, max(dsCounty$DV)), expand=c(0,0))
