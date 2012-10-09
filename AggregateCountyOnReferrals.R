@@ -1,5 +1,3 @@
-###TODO: Change 'LeFlore' to 'Le Flore' county.
-
 rm(list=ls(all=TRUE))  #Clears variables
 require(RODBC)
 require(plyr) #For renaming columns
@@ -15,7 +13,7 @@ require(lubridate) #For dealing with dates
 pathReadonlyDatasets <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/SafeCareCostEffectiveness/ReadonlyDatabases"
 pathWorkingDatasets <- "//dch-res/PEDS-FILE-SV/Data/CCAN/CCANResEval/SafeCareCostEffectiveness/WorkingDatasets"
 # pathWorkingDatasets <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
-pathOutputVictim <- file.path(pathWorkingDatasets, "Victim.csv")
+pathOutputAllegation <- file.path(pathWorkingDatasets, "Allegation.csv")
 pathOutputSummaryCounty <- file.path(pathWorkingDatasets, "CountCounty.csv")
 pathOutputSummaryCountyYear <- file.path(pathWorkingDatasets, "CountCountyYear.csv")
 pathOutputSummaryCountyType <- file.path(pathWorkingDatasets, "CountCountyType.csv")
@@ -30,37 +28,48 @@ startTime <- Sys.time()
 channelKids07 <- odbcConnectAccess2007(pathKids07)
 # dsReferral <- sqlFetch(channelKids07, "Chrefer")
 # dsAllegation <- sqlFetch(channelKids07, "Challeg")
-dsReferral <- sqlQuery(channelKids07, query="SELECT ReferId, CaseId, ReferDt, CmpltDt, ReferTyp FROM Chrefer")
+dsReferral <- sqlQuery(channelKids07, query="SELECT ReferId, CaseId, ReferDt, ReferTyp FROM Chrefer") #CmpltDt,
 dsAllegation <- sqlQuery(channelKids07, query="SELECT ReferId, VctmId, AbuseFlg, NglctFlg, SexAbFlg FROM Challeg")
 odbcClose(channelKids07)
 Sys.time() - startTime 
 # rm(dsReferral)
 
 dsReferral <- plyr::rename(dsReferral, replace=c(ReferId="ReferralID", CaseId="KK", ReferDt="ReferralDate"))
-# dsReferral$ReferralMonth <- as.Date(ISOdate(year(dsReferral$ReferralDate), month(dsReferral$ReferralDate), 1))
+dsReferral$ReferralMonth <- as.Date(ISOdate(year(dsReferral$ReferralDate), month(dsReferral$ReferralDate), 15))
+dsReferral <- dsReferral[, colnames(dsReferral) !="ReferralDate"]
 
-dsAllegation <- plyr::rename(dsAllegation, replace=c(ReferId="ReferralID", VctmId="VictimID"))
+dsAllegation <- plyr::rename(dsAllegation, replace=c(ReferId="ReferralID", VctmId="VictimID", AbuseFlg="Abuse", NglctFlg="Neglect", SexAbFlg="SexualAbuse"))
 length(unique(dsAllegation$ReferralID))
 length(unique(dsAllegation$VictimID))
+
+if( !all(dsAllegation$Abuse %in% c("Y", "N")) ) stop("There was at least one value in dsAllegation$Abuse that wasn't 'Y' or 'N'")
+if( !all(dsAllegation$Neglect %in% c("Y", "N")) ) stop("There was at least one value in dsAllegation$Neglect that wasn't 'Y' or 'N'")
+if( !all(dsAllegation$SexualAbuse %in% c("Y", "N")) ) stop("There was at least one value in dsAllegation$SexualAbuse that wasn't 'Y' or 'N'")
+dsAllegation$Abuse <- ifelse(dsAllegation$Abuse=="Y", 1, 0)
+dsAllegation$Neglect <- ifelse(dsAllegation$Neglect=="Y", 1, 0)
+dsAllegation$SexualAbuse <- ifelse(dsAllegation$SexualAbuse=="Y", 1, 0)
+
+
 
 #table(dsAllegation$ReferralID, dsAllegation$VictimID)
 # count(dsAllegation. c("ReferralID", "VictimID"))
 # count(dsAllegation, "ReferId")
 
-startTime <- Sys.time()
-CollapseAllegations <- function( df ) {
-  with(df, data.frame(
-    Abuse=any(df$AbuseFlg=="Y"),
-    Neglect=any(df$NglctFlg=="Y"),
-    SexualAbuse=any(df$SexAbFlg=="Y")
-  ))
-}
-### TODO: don't mapreduce on any variable
-dsAllegationByVictimAndReferral <- ddply(dsAllegation, .variables=c("ReferralID", "VictimID"), CollapseAllegations, .parallel=FALSE)
-Sys.time() - startTime #Serial: 2.664216 mins
+# startTime <- Sys.time()
+# CollapseAllegations <- function( df ) {
+#   with(df, data.frame(
+#     Abuse=any(df$AbuseFlg=="Y"),
+#     Neglect=any(df$NglctFlg=="Y"),
+#     SexualAbuse=any(df$SexAbFlg=="Y")
+#   ))
+# }
+# ### TODO: don't mapreduce on any variable
+# dsAllegationByVictimAndReferral <- ddply(dsAllegation, .variables=c("ReferralID", "VictimID"), CollapseAllegations, .parallel=FALSE)
+# Sys.time() - startTime #Serial: 2.664216 mins
 
 # ds <- merge(x=dsReferral, y=dsAllegation, by="ReferralID", all.x=TRUE, all.y=FALSE)
-ds <- merge(x=dsAllegationByVictimAndReferral, y=dsReferral, by="ReferralID", all.x=TRUE, all.y=FALSE)
+#ds <- merge(x=dsAllegationByVictimAndReferral, y=dsReferral, by="ReferralID", all.x=TRUE, all.y=FALSE)
+ds <- merge(x=dsAllegation, y=dsReferral, by="ReferralID", all.x=TRUE, all.y=FALSE)
 
 dsCountyNames <- read.csv(pathCountyLookupTable)
 dsCountyNames <- plyr::rename(dsCountyNames, replace=c(Name="CountyName"))
@@ -115,8 +124,11 @@ Sys.time() - startTime #20.0166 secs
 ds <- merge(x=ds, y=dsMsurCollapsed, by="KK", all.x=TRUE, all.y=FALSE)
 
 #variablesToDrop <- c("CmpltDt", "MsurSource", "DateFind")
-variablesToDrop <- c("KK","ReferralID","VictimID","CmpltDt", "MsurSource", "DateFind")
+variablesToDrop <- c("KK","ReferralID","VictimID", "MsurSource", "DateFind")
 ds <- ds[, !(colnames(ds) %in% variablesToDrop)]
+
+class(ds$CountyName)
+ds$CountyName <- as.character(ds$CountyName)
 
 dsSummaryCounty <- count(ds, c("CountyID", "CountyName"))
 dsSummaryCountyYear <- count(ds, c("CountyID", "CountyName", "MsurYear"))
@@ -127,7 +139,7 @@ dsSummaryCounty <- plyr::rename(dsSummaryCounty, replace=c(freq="Count"))
 dsSummaryCountyYear <- plyr::rename(dsSummaryCountyYear, replace=c(freq="Count"))
 dsSummaryCountyType <- plyr::rename(dsSummaryCountyType, replace=c(freq="Count"))
 
-write.csv(ds, pathOutputVictim, row.names=FALSE)
+write.csv(ds, pathOutputAllegation, row.names=FALSE, quote=FALSE)
 write.csv(dsSummaryCounty, pathOutputSummaryCounty, row.names=FALSE)
 write.csv(dsSummaryCountyYear, pathOutputSummaryCountyYear, row.names=FALSE)
 write.csv(dsSummaryCountyType, pathOutputSummaryCountyType, row.names=FALSE)
@@ -136,5 +148,5 @@ write.csv(dsSummaryCountyType, pathOutputSummaryCountyType, row.names=FALSE)
 
 
 # melt(dsSummaryCountyType, value.name="Count")
-typesID <-
-vaggregate(.value=dsSummaryCountyType$Count, .group=dsSummaryCountyType$Abuse, .fun=sum)
+# typesID <-
+# vaggregate(.value=dsSummaryCountyType$Count, .group=dsSummaryCountyType$Abuse, .fun=sum)
