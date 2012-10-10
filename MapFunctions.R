@@ -79,11 +79,12 @@ MapCountiesWithInset <- function(
   
   
   #Start a new page and define the layout of the panels
-  grid.newpage()
-  subvp <- viewport(width=.4, height=.4, x=0, y=0, just=c(0,0))
+#   grid.newpage()
+  subvp <- viewport(width=.35, height=.7, x=0, y=0, just=c(0,0))
   
   big <-  MapCounties(dsValue=dsValueCountyOneYear, mapTitle=mapTitle)
   small <- GraphLongitudinalTrend(dsValueCountyAllYears, dsValueState, labelThreshold=NA, yearBand=yearBand)
+#   big
   print( big )
   print( small, vp=subvp )
   
@@ -127,6 +128,6 @@ dsCounty$DV <- dsCounty[, dvName]
 dsState$DV <- dsState[, dvName]
 
 
-MapCountiesWithInset(dsValueCountyOneYear=dsValueAllVariables, mapTitle=dvName, 
-  dsValueCountyAllYears=dsCounty, dsValueState=dsState, yearBand=2002)
-names(dsValueAllVariables)
+# MapCountiesWithInset(dsValueCountyOneYear=dsValueAllVariables, mapTitle=dvName, 
+#   dsValueCountyAllYears=dsCounty, dsValueState=dsState, yearBand=2002)
+# names(dsValueAllVariables)
