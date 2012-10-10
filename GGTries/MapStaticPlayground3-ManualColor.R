@@ -21,12 +21,12 @@ deviceWidth <- 10 #20 #10 #6.5
 pathInputDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
 pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
 
-dvName <- "CountPerCapita"
-roundedDigits <- 2
+dvName <- "CountPerCapitaAnnual"
+roundedDigits <- 3
 colorPower <- 1
-# dvName <- "CountPerCapitaRank"
-# roundedDigits <- 0
-# colorPower <- 2
+dvName <- "CountPerCapitaRank"
+roundedDigits <- 0
+colorPower <- 2
 
 dsValue <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
 dsValue$DV <- dsValue[, dvName]

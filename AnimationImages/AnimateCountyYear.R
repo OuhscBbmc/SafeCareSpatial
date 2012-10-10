@@ -24,26 +24,27 @@ ds$DVLabel <- gsub("^0.", ".",round(ds$DV,3)) #Remove leading zeros.
 # dvName <- "CountPerCapitaRank" #The county's rank for the number of victims per county population; darker counties have more victims, adjusted for pop
 # ds$DV <- ds[, dvName]
 # ds$DVLabel <- ds$DV
+
 dvFloor <- min(ds$DV)
 dvCeiling <- max(ds$DV)
-
 source(pathInputMappingCode)
 
-years <- sort(unique(ds$Year))
+years <- 2002:2011 #years <- sort(unique(ds$ReferralYear))
 intervals <- rep(1, length(years))
 intervals[1] <- 4
 intervals[length(intervals)] <- 4
 # saveMovie({
 s <- saveGIF({
   for( year in years ) {
-    dsSlice <- ds[ds$Year==year, ]
+    dsSlice <- ds[ds$ReferralYear==year, ]
     
     title <- paste(dvName, year)
     g <- MapCounties(dsValue=dsSlice, deviceWidth=14, showCountyValues=T, mapTitle=title,
                      dvFloor=dvFloor, dvCeiling=dvCeiling)
     print(g)
+    # ggsave(filename=file.path(pathDirectoryCode, "Animated.png"), plot=g)
   }
 }, movie.name=paste0(dvName, ".gif"), outdir=pathDirectoryImages, interval=intervals,ani.width=1600, ani.height=800)
-# ggsave(filename=file.path(pathDirectoryCode, "Animated.png"), plot=g)
+
 ss <- strsplit(s, split=" ")
 ss[[length(ss)]][length(ss[[1]])]

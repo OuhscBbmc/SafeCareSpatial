@@ -12,11 +12,8 @@ require(grid)
 require(ggplot2)
 require(plyr)
 
-
-
-
 MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues=TRUE, mapTitle="",
-  dvFloor=min(dsValue$DV), dvCeiling=max(dsValuePlot$DV)                     ) {
+  dvFloor=min(dsValue$DV), dvCeiling=max(dsValuePlot$DV) ) {
   
   dsValuePlot <- data.frame(
     CountyID=dsValue$CountyID, 
@@ -74,6 +71,9 @@ MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues
   return( g )
 }
 
+MapCountiesWithInset <- function( 
+  dsValue, deviceWidth=10, colorPower=1, showCountyValues=TRUE, mapTitle="", dvFloor=min(dsValue$DV), dvCeiling=max(dsValuePlot$DV), #For the map
+  dsCountry, dsState, labelThreshold=.01, yearBand=NA
 # # rm(list=ls(all=TRUE))
 # pathInputDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
 # pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
