@@ -29,6 +29,7 @@ MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues
   intervalCount <- 3
   #breakPoints <- pretty(dsValuePlot$DV, n=intervalCount)
   breakPoints <- seq(from=dvFloor,to=dvCeiling, length.out=intervalCount+1)
+  print(breakPoints)
   
   # highestFloor <- breakPoints[intervalCount]
   # inHighestCategory <- (dsValuePlot$DV > highestFloor)
@@ -68,6 +69,7 @@ MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues
   g <- g + theme(legend.position=c(0,0), legend.justification=c("left","bottom"))
   g <- g + theme(plot.margin=unit(c(0, 0, 0, 0), "cm")) #+ theme(panel.margin = unit(c(0, 0, 0, 0), "cm"))
   g <- g + annotate("text", x=-102, y=36.2, label=mapTitle, hjust=.5, vjust=0, size=deviceWidth*.7)
+#   g <- g + annotate("text", x=-101.8, y=36.2, label=mapTitle, hjust=.5, vjust=1, size=deviceWidth*.7)
   g <- g + annotate("text", x=-99.1, y=33.9, label="From an incomplete dataset;\nDo not take actual values seriously", hjust=.5, vjust=.5, size=deviceWidth*.35)
   
   return( g )
@@ -91,7 +93,7 @@ MapCountiesWithInset <- function(
   print( small, vp=subvp )
   
 }
-# # rm(list=ls(all=TRUE))
+# # # rm(list=ls(all=TRUE))
 # pathInputDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
 # pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
 # 
@@ -114,7 +116,7 @@ MapCountiesWithInset <- function(
 # # deviceHeight <- deviceWidth * aspectRatio
 # # windows(width=deviceWidth, height=deviceHeight)
 # 
-# # MapCounties(dsValue=dsValueAllVariables, mapTitle=dvName)
+# MapCounties(dsValue=dsValueAllVariables, mapTitle=paste0(dvName,"\n(Average over 2002-2011)"))
 # 
 # years <- 2002:2011
 # pathInputSummaryCountyYear <- file.path(pathInputDirectory, "CountCountyYearFortified.csv")
@@ -128,8 +130,8 @@ MapCountiesWithInset <- function(
 # 
 # dsCounty$DV <- dsCounty[, dvName]
 # dsState$DV <- dsState[, dvName]
-# 
-# 
-# # MapCountiesWithInset(dsValueCountyOneYear=dsValueAllVariables, mapTitle=dvName, 
-# #   dsValueCountyAllYears=dsCounty, dsValueState=dsState, yearBand=2002)
-# # names(dsValueAllVariables)
+
+
+# MapCountiesWithInset(dsValueCountyOneYear=dsValueAllVariables, mapTitle=dvName, 
+#   dsValueCountyAllYears=dsCounty, dsValueState=dsState, yearBand=2002)
+# names(dsValueAllVariables)

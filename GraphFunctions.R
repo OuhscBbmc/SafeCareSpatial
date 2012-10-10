@@ -46,9 +46,9 @@ GraphLongitudinalTrend <- function( dsCounty, dsState, labelThreshold=.01, yearB
 # dsState <- dsState[dsState$ReferralYear %in% years, ]
 # 
 # 
-# # deviceWidth <- 10 #20 #10 #6.5
+# deviceWidth <- 10 #20 #10 #6.5
 # # if( names(dev.cur()) != "null device" ) dev.off()
-# # aspectRatio <- .5
+# # aspectRatio <- .75
 # # deviceHeight <- deviceWidth * aspectRatio
 # # windows(width=deviceWidth, height=deviceHeight)
 # 
@@ -64,4 +64,4 @@ GraphLongitudinalTrend <- function( dsCounty, dsState, labelThreshold=.01, yearB
 # # dsCounty$DVLabel <- dsCounty$DV
 # 
 # #pretendYear <- 2005
-# GraphLongitudinalTrend(dsCounty, dsState, yearBand=2002)
+# GraphLongitudinalTrend(dsCounty, dsState, labelThreshold=.0175, yearBand=NA)

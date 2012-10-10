@@ -62,7 +62,7 @@ s <- saveGIF({
 
     
     MapCountiesWithInset(dsValueCountyOneYear=dsSlice,  deviceWidth=18, mapTitle=title, dvFloor=dvFloor, dvCeiling=dvCeiling,
-                         dsValueCountyAllYears=dsCountyAllYears, dsValueState=dsState, labelThreshold=.0175, yearBand=year   )
+                         dsValueCountyAllYears=dsCountyAllYears, dsValueState=dsState, labelThreshold=.017886602, yearBand=year   )
 #     names(dsValueAllVariables)
     
   }
