@@ -73,7 +73,9 @@ MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues
 
 MapCountiesWithInset <- function( 
   dsValue, deviceWidth=10, colorPower=1, showCountyValues=TRUE, mapTitle="", dvFloor=min(dsValue$DV), dvCeiling=max(dsValuePlot$DV), #For the map
-  dsCountry, dsState, labelThreshold=.01, yearBand=NA
+  dsCountry, dsState, labelThreshold=.01, yearBand=NA ) {
+  
+}
 # # rm(list=ls(all=TRUE))
 # pathInputDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
 # pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
