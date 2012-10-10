@@ -127,6 +127,8 @@ ds <- ds[, (colnames(ds) !="Year")]
 dsMsur <- dsMsur[, (colnames(dsMsur) !="Year")]
 # sum(is.na(ds$CountyName))
 
+#Do a full left join, calculate the differences in years in a new column.  Then ddply collapse on that minim
+
 
 # dsMsurCollapsed <- ddply(dsMsur, "KK", subset, rank(DateFind)==1)
 # dsTest <- merge(x=ds, y=dsMsurCollapsed, 
