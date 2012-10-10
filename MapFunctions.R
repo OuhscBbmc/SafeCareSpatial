@@ -68,6 +68,8 @@ MapCounties <- function( dsValue, deviceWidth=10, colorPower=1, showCountyValues
   g <- g + theme(legend.position=c(0,0), legend.justification=c("left","bottom"))
   g <- g + theme(plot.margin=unit(c(0, 0, 0, 0), "cm")) #+ theme(panel.margin = unit(c(0, 0, 0, 0), "cm"))
   g <- g + annotate("text", x=-102, y=36.2, label=mapTitle, hjust=.5, vjust=0, size=deviceWidth*.7)
+  g <- g + annotate("text", x=-99.1, y=33.9, label="From an incomplete dataset;\nDo not take actual values seriously", hjust=.5, vjust=.5, size=deviceWidth*.35)
+  
   return( g )
 }
 
@@ -80,54 +82,54 @@ MapCountiesWithInset <- function(
   
   #Start a new page and define the layout of the panels
 #   grid.newpage()
-  subvp <- viewport(width=.35, height=.7, x=0, y=0, just=c(0,0))
+  subvp <- viewport(width=.36, height=.7, x=0, y=0, just=c(0,0))
   
-  big <-  MapCounties(dsValue=dsValueCountyOneYear, mapTitle=mapTitle)
-  small <- GraphLongitudinalTrend(dsValueCountyAllYears, dsValueState, labelThreshold=NA, yearBand=yearBand)
+  big <-  MapCounties(dsValue=dsValueCountyOneYear, deviceWidth=deviceWidth, mapTitle=mapTitle, dvFloor=dvFloor, dvCeiling=dvCeiling)
+  small <- GraphLongitudinalTrend(dsValueCountyAllYears, dsValueState, labelThreshold=labelThreshold, yearBand=yearBand)
 #   big
   print( big )
   print( small, vp=subvp )
   
 }
 # # rm(list=ls(all=TRUE))
-pathInputDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
-pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
-
-dvName <- "CountPerCapitaAnnual"
-roundedDigits <- 3
-colorPower <- 1
-# dvName <- "CountPerCapitaRank"
-# roundedDigits <- 0
-# colorPower <- 2
-
-dsValueAllVariables <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
-dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
-dsValueAllVariables$DVLabel <- gsub("^0.", ".",round(dsValueAllVariables$DV,roundedDigits)) #Remove leading zeros.
-
-# rm(pathInputDirectory, pathInputSummaryCounty, roundedDigits)
-
-deviceWidth <- 10 #20 #10 #6.5
-# if( names(dev.cur()) != "null device" ) dev.off()
-# aspectRatio <- .5
-# deviceHeight <- deviceWidth * aspectRatio
-# windows(width=deviceWidth, height=deviceHeight)
-
-# MapCounties(dsValue=dsValueAllVariables, mapTitle=dvName)
-
-years <- 2002:2011
-pathInputSummaryCountyYear <- file.path(pathInputDirectory, "CountCountyYearFortified.csv")
-pathInputSummaryStateYear <- file.path(pathInputDirectory, "CountStateYearFortified.csv")
-
-dsCounty <- read.csv(pathInputSummaryCountyYear, stringsAsFactors=FALSE)
-dsState <- read.csv(pathInputSummaryStateYear, stringsAsFactors=FALSE)
-
-dsCounty <- dsCounty[dsCounty$ReferralYear %in% years, ]
-dsState <- dsState[dsState$ReferralYear %in% years, ]
-
-dsCounty$DV <- dsCounty[, dvName]
-dsState$DV <- dsState[, dvName]
-
-
-# MapCountiesWithInset(dsValueCountyOneYear=dsValueAllVariables, mapTitle=dvName, 
-#   dsValueCountyAllYears=dsCounty, dsValueState=dsState, yearBand=2002)
-# names(dsValueAllVariables)
+# pathInputDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
+# pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
+# 
+# dvName <- "CountPerCapitaAnnual"
+# roundedDigits <- 3
+# colorPower <- 1
+# # dvName <- "CountPerCapitaRank"
+# # roundedDigits <- 0
+# # colorPower <- 2
+# 
+# dsValueAllVariables <- read.csv(pathInputSummaryCounty, stringsAsFactors=FALSE)
+# dsValueAllVariables$DV <- dsValueAllVariables[, dvName]
+# dsValueAllVariables$DVLabel <- gsub("^0.", ".",round(dsValueAllVariables$DV,roundedDigits)) #Remove leading zeros.
+# 
+# # rm(pathInputDirectory, pathInputSummaryCounty, roundedDigits)
+# 
+# deviceWidth <- 10 #20 #10 #6.5
+# # if( names(dev.cur()) != "null device" ) dev.off()
+# # aspectRatio <- .5
+# # deviceHeight <- deviceWidth * aspectRatio
+# # windows(width=deviceWidth, height=deviceHeight)
+# 
+# # MapCounties(dsValue=dsValueAllVariables, mapTitle=dvName)
+# 
+# years <- 2002:2011
+# pathInputSummaryCountyYear <- file.path(pathInputDirectory, "CountCountyYearFortified.csv")
+# pathInputSummaryStateYear <- file.path(pathInputDirectory, "CountStateYearFortified.csv")
+# 
+# dsCounty <- read.csv(pathInputSummaryCountyYear, stringsAsFactors=FALSE)
+# dsState <- read.csv(pathInputSummaryStateYear, stringsAsFactors=FALSE)
+# 
+# dsCounty <- dsCounty[dsCounty$ReferralYear %in% years, ]
+# dsState <- dsState[dsState$ReferralYear %in% years, ]
+# 
+# dsCounty$DV <- dsCounty[, dvName]
+# dsState$DV <- dsState[, dvName]
+# 
+# 
+# # MapCountiesWithInset(dsValueCountyOneYear=dsValueAllVariables, mapTitle=dvName, 
+# #   dsValueCountyAllYears=dsCounty, dsValueState=dsState, yearBand=2002)
+# # names(dsValueAllVariables)

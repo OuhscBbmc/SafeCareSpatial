@@ -17,7 +17,7 @@ pathOutputAnimation <- file.path(pathDirectoryCode, "MapAnimation.gif")
 years <- 2002:2011 #years <- sort(unique(dsCountyAllYears$ReferralYear))
 
 dsCountyAllYears <- read.csv(pathInputSummaryCountyYear, stringsAsFactors=FALSE)
-dsCounty <- dsCounty[dsCounty$ReferralYear %in% years, ]
+dsCountyAllYears <- dsCountyAllYears[dsCountyAllYears$ReferralYear %in% years, ]
 
 # dvName <- "Count" #The county's rank for the number of victims per county population; darker counties have more total victims
 # dsCountyAllYears$DV <- dsCountyAllYears[, dvName]
@@ -61,8 +61,8 @@ s <- saveGIF({
     
 
     
-    MapCountiesWithInset(dsValueCountyOneYear=dsSlice,  deviceWidth=14, mapTitle=title, 
-                         dsValueCountyAllYears=dsCountyAllYears, dsValueState=dsState, yearBand=year)
+    MapCountiesWithInset(dsValueCountyOneYear=dsSlice,  deviceWidth=18, mapTitle=title, dvFloor=dvFloor, dvCeiling=dvCeiling,
+                         dsValueCountyAllYears=dsCountyAllYears, dsValueState=dsState, labelThreshold=.0175, yearBand=year   )
 #     names(dsValueAllVariables)
     
   }

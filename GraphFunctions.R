@@ -9,7 +9,7 @@ GraphLongitudinalTrend <- function( dsCounty, dsState, labelThreshold=.01, yearB
 
   g <- ggplot(dsCounty, aes(x=ReferralYear, y=DV, ymin=0, group=CountyID, color=factor(CountyID)))
   if( !is.na(yearBand) )
-    g <- g + geom_vline(xintercept = yearBand, alpha=.2, size=30)
+    g <- g + geom_vline(xintercept = yearBand, alpha=.2, size=20)
   g <- g + geom_line(stat="identity")
   g <- g + geom_line(data=dsState, aes(x=ReferralYear, y=DV, group=NA, color=NA), stat="identity", size=1, color="black")
   g <- g + geom_smooth(data=dsState, aes(x=ReferralYear, y=DV, group=NA, color=NA), method="loess", size=3)
