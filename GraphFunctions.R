@@ -6,7 +6,6 @@ require(plyr)
 # require(animation)
 
 GraphLongitudinalTrend <- function( dsCounty, dsState, labelThreshold=.01, yearBand=NA ) {
-
   g <- ggplot(dsCounty, aes(x=ReferralYear, y=DV, ymin=0, group=CountyID, color=factor(CountyID)))
   if( !is.na(yearBand) )
     g <- g + geom_vline(xintercept = yearBand, alpha=.2, size=20)
