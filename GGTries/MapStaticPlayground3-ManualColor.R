@@ -45,7 +45,7 @@ dsValuePlot <- data.frame(
 
 intervalCount <- 3
 #breakPoints <- pretty(dsValuePlot$DV, n=intervalCount)
-breakPoints <- seq(from=min(dsValuePlot$DV),to=max(dsValuePlot$DV), length.out=intervalCount+1)
+breakPoints <- seq(from=min(dsValuePlot$DV), to=max(dsValuePlot$DV), length.out=intervalCount+1)
 
 # highestFloor <- breakPoints[intervalCount]
 # inHighestCategory <- (dsValuePlot$DV > highestFloor)
