@@ -45,8 +45,8 @@ dsState$DV <- dsState[, dvName]
 
 
 intervals <- rep(1, length(years))
-intervals[1] <- 4
-intervals[length(intervals)] <- 4
+intervals[1] <- 1
+intervals[length(intervals)] <- 3
 
 s <- saveGIF({
   for( year in years ) {
