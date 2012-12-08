@@ -84,7 +84,9 @@ MapCountiesWithInset <- function(
   
   #Start a new page and define the layout of the panels
 #   grid.newpage()
-  subvp <- viewport(width=.36, height=.7, x=0, y=0, just=c(0,0))
+  #Place the bottom left corner of the inset so it's touchingt the bottom left of the parent panels (with the x, y & just parameters). 
+  #   Extend the insert 70% of the way up the parent panel, and 36% across.
+  subvp <- viewport(width=.36, height=.7, x=0, y=0, just=c(0,0)) 
   
   big <-  MapCounties(dsValue=dsValueCountyOneYear, deviceWidth=deviceWidth, mapTitle=mapTitle, dvFloor=dvFloor, dvCeiling=dvCeiling)
   small <- GraphLongitudinalTrend(dsValueCountyAllYears, dsValueState, labelThreshold=labelThreshold, yearBand=yearBand)
