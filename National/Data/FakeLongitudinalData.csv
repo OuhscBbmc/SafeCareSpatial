@@ -1,0 +1,246 @@
+StateName,Year,CountPerCapita,Proportion
+alabama,2011,NA,NA
+arizona,2011,NA,NA
+arkansas,2011,NA,NA
+california,2011,NA,NA
+colorado,2011,97,NA
+connecticut,2011,105,NA
+delaware,2011,NA,0.901174078
+district of columbia,2011,NA,NA
+florida,2011,NA,NA
+georgia,2011,NA,NA
+idaho,2011,NA,NA
+illinois,2011,NA,NA
+indiana,2011,99,NA
+iowa,2011,NA,NA
+kansas,2011,NA,NA
+kentucky,2011,NA,NA
+louisiana,2011,NA,NA
+maine,2011,NA,NA
+maryland,2011,NA,NA
+massachusetts,2011,NA,NA
+michigan,2011,81,NA
+minnesota,2011,NA,NA
+mississippi,2011,90,NA
+missouri,2011,NA,NA
+montana,2011,NA,0.770823122
+nebraska,2011,NA,NA
+nevada,2011,NA,NA
+new hampshire,2011,91,NA
+new jersey,2011,NA,NA
+new mexico,2011,97,NA
+new york,2011,NA,0.39496714
+north carolina,2011,NA,NA
+north dakota,2011,NA,NA
+ohio,2011,NA,0.651701271
+oklahoma,2011,90,NA
+oregon,2011,92,0.171212769
+pennsylvania,2011,NA,NA
+rhode island,2011,NA,NA
+south carolina,2011,NA,NA
+south dakota,2011,105,0.178758057
+tennessee,2011,NA,NA
+texas,2011,NA,0.244472611
+utah,2011,NA,0.59128776
+vermont,2011,NA,0.932553769
+virginia,2011,NA,NA
+washington,2011,NA,NA
+west virginia,2011,NA,NA
+wisconsin,2011,NA,NA
+wyoming,2011,NA,0.362366686
+alabama,2010,NA,NA
+arizona,2010,NA,NA
+arkansas,2010,NA,NA
+california,2010,NA,NA
+colorado,2010,97,NA
+connecticut,2010,105,NA
+delaware,2010,NA,0.901174078
+district of columbia,2010,NA,NA
+florida,2010,NA,NA
+georgia,2010,NA,NA
+idaho,2010,NA,NA
+illinois,2010,NA,NA
+indiana,2010,99,NA
+iowa,2010,NA,NA
+kansas,2010,NA,NA
+kentucky,2010,NA,NA
+louisiana,2010,NA,NA
+maine,2010,NA,NA
+maryland,2010,NA,NA
+massachusetts,2010,NA,NA
+michigan,2010,81,NA
+minnesota,2010,NA,NA
+mississippi,2010,90,NA
+missouri,2010,NA,NA
+montana,2010,NA,0.770823122
+nebraska,2010,NA,NA
+nevada,2010,NA,NA
+new hampshire,2010,91,NA
+new jersey,2010,NA,NA
+new mexico,2010,97,NA
+new york,2010,NA,0.39496714
+north carolina,2010,NA,NA
+north dakota,2010,NA,NA
+ohio,2010,NA,0.651701271
+oklahoma,2010,90,NA
+oregon,2010,92,0.171212769
+pennsylvania,2010,NA,NA
+rhode island,2010,NA,NA
+south carolina,2010,NA,NA
+south dakota,2010,105,0.178758057
+tennessee,2010,NA,NA
+texas,2010,NA,0.244472611
+utah,2010,NA,0.59128776
+vermont,2010,NA,0.932553769
+virginia,2010,NA,NA
+washington,2010,NA,NA
+west virginia,2010,NA,NA
+wisconsin,2010,NA,NA
+wyoming,2010,NA,0.362366686
+alabama,2009,NA,NA
+arizona,2009,NA,NA
+arkansas,2009,NA,NA
+california,2009,NA,NA
+colorado,2009,97,NA
+connecticut,2009,105,NA
+delaware,2009,NA,0.901174078
+district of columbia,2009,NA,NA
+florida,2009,NA,NA
+georgia,2009,NA,NA
+idaho,2009,NA,NA
+illinois,2009,NA,NA
+indiana,2009,99,NA
+iowa,2009,NA,NA
+kansas,2009,NA,NA
+kentucky,2009,NA,NA
+louisiana,2009,NA,NA
+maine,2009,NA,NA
+maryland,2009,NA,NA
+massachusetts,2009,NA,NA
+michigan,2009,81,NA
+minnesota,2009,NA,NA
+mississippi,2009,90,NA
+missouri,2009,NA,NA
+montana,2009,NA,0.770823122
+nebraska,2009,NA,NA
+nevada,2009,NA,NA
+new hampshire,2009,91,NA
+new jersey,2009,NA,NA
+new mexico,2009,97,NA
+new york,2009,NA,0.39496714
+north carolina,2009,NA,NA
+north dakota,2009,NA,NA
+ohio,2009,NA,0.651701271
+oklahoma,2009,90,NA
+oregon,2009,92,0.171212769
+pennsylvania,2009,NA,NA
+rhode island,2009,NA,NA
+south carolina,2009,NA,NA
+south dakota,2009,105,0.178758057
+tennessee,2009,NA,NA
+texas,2009,NA,0.244472611
+utah,2009,NA,0.59128776
+vermont,2009,NA,0.932553769
+virginia,2009,NA,NA
+washington,2009,NA,NA
+west virginia,2009,NA,NA
+wisconsin,2009,NA,NA
+wyoming,2009,NA,0.362366686
+alabama,2008,NA,NA
+arizona,2008,NA,NA
+arkansas,2008,NA,NA
+california,2008,NA,NA
+colorado,2008,97,NA
+connecticut,2008,105,NA
+delaware,2008,NA,0.901174078
+district of columbia,2008,NA,NA
+florida,2008,NA,NA
+georgia,2008,NA,NA
+idaho,2008,NA,NA
+illinois,2008,NA,NA
+indiana,2008,99,NA
+iowa,2008,NA,NA
+kansas,2008,NA,NA
+kentucky,2008,NA,NA
+louisiana,2008,NA,NA
+maine,2008,NA,NA
+maryland,2008,NA,NA
+massachusetts,2008,NA,NA
+michigan,2008,81,NA
+minnesota,2008,NA,NA
+mississippi,2008,90,NA
+missouri,2008,NA,NA
+montana,2008,NA,0.770823122
+nebraska,2008,NA,NA
+nevada,2008,NA,NA
+new hampshire,2008,91,NA
+new jersey,2008,NA,NA
+new mexico,2008,97,NA
+new york,2008,NA,0.39496714
+north carolina,2008,NA,NA
+north dakota,2008,NA,NA
+ohio,2008,NA,0.651701271
+oklahoma,2008,90,NA
+oregon,2008,92,0.171212769
+pennsylvania,2008,NA,NA
+rhode island,2008,NA,NA
+south carolina,2008,NA,NA
+south dakota,2008,105,0.178758057
+tennessee,2008,NA,NA
+texas,2008,NA,0.244472611
+utah,2008,NA,0.59128776
+vermont,2008,NA,0.932553769
+virginia,2008,NA,NA
+washington,2008,NA,NA
+west virginia,2008,NA,NA
+wisconsin,2008,NA,NA
+wyoming,2008,NA,0.362366686
+alabama,2007,NA,NA
+arizona,2007,NA,NA
+arkansas,2007,NA,NA
+california,2007,NA,NA
+colorado,2007,97,NA
+connecticut,2007,105,NA
+delaware,2007,NA,0.901174078
+district of columbia,2007,NA,NA
+florida,2007,NA,NA
+georgia,2007,NA,NA
+idaho,2007,NA,NA
+illinois,2007,NA,NA
+indiana,2007,99,NA
+iowa,2007,NA,NA
+kansas,2007,NA,NA
+kentucky,2007,NA,NA
+louisiana,2007,NA,NA
+maine,2007,NA,NA
+maryland,2007,NA,NA
+massachusetts,2007,NA,NA
+michigan,2007,81,NA
+minnesota,2007,NA,NA
+mississippi,2007,90,NA
+missouri,2007,NA,NA
+montana,2007,NA,0.770823122
+nebraska,2007,NA,NA
+nevada,2007,NA,NA
+new hampshire,2007,91,NA
+new jersey,2007,NA,NA
+new mexico,2007,97,NA
+new york,2007,NA,0.39496714
+north carolina,2007,NA,NA
+north dakota,2007,NA,NA
+ohio,2007,NA,0.651701271
+oklahoma,2007,90,NA
+oregon,2007,92,0.171212769
+pennsylvania,2007,NA,NA
+rhode island,2007,NA,NA
+south carolina,2007,NA,NA
+south dakota,2007,105,0.178758057
+tennessee,2007,NA,NA
+texas,2007,NA,0.244472611
+utah,2007,NA,0.59128776
+vermont,2007,NA,0.932553769
+virginia,2007,NA,NA
+washington,2007,NA,NA
+west virginia,2007,NA,NA
+wisconsin,2007,NA,NA
+wyoming,2007,NA,0.362366686
