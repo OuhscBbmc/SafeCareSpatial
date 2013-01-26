@@ -1,50 +1,50 @@
-"StateName","CountPerCapita"
-"alabama",NA
-"arizona",NA
-"arkansas",NA
-"california",0.804192699026316
-"colorado",NA
-"connecticut",NA
-"delaware",NA
-"district of columbia",0.0927364870440215
-"florida",NA
-"georgia",NA
-"idaho",NA
-"illinois",NA
-"indiana",0.920930397463962
-"iowa",NA
-"kansas",NA
-"kentucky",NA
-"louisiana",NA
-"maine",NA
-"maryland",NA
-"massachusetts",NA
-"michigan",0.89514705282636
-"minnesota",NA
-"mississippi",NA
-"missouri",NA
-"montana",0.0491703215520829
-"nebraska",NA
-"nevada",0.189538272796199
-"new hampshire",NA
-"new jersey",NA
-"new mexico",0.850485329749063
-"new york",NA
-"north carolina",NA
-"north dakota",NA
-"ohio",NA
-"oklahoma",NA
-"oregon",NA
-"pennsylvania",NA
-"rhode island",NA
-"south carolina",NA
-"south dakota",0.522905898280442
-"tennessee",0.770917054032907
-"texas",NA
-"utah",NA
-"vermont",0.433383974945173
-"virginia",NA
-"washington",NA
-"west virginia",NA
-"wisconsin",NA
-"wyoming",NA
+"StateName","CountPerCapita","Proportion"
+"alabama",NA,NA
+"arizona",NA,NA
+"arkansas",NA,NA
+"california",NA,NA
+"colorado",97,NA
+"connecticut",105,NA
+"delaware",NA,0.901174077764153
+"district of columbia",NA,NA
+"florida",NA,NA
+"georgia",NA,NA
+"idaho",NA,NA
+"illinois",NA,NA
+"indiana",99,NA
+"iowa",NA,NA
+"kansas",NA,NA
+"kentucky",NA,NA
+"louisiana",NA,NA
+"maine",NA,NA
+"maryland",NA,NA
+"massachusetts",NA,NA
+"michigan",81,NA
+"minnesota",NA,NA
+"mississippi",90,NA
+"missouri",NA,NA
+"montana",NA,0.770823121769354
+"nebraska",NA,NA
+"nevada",NA,NA
+"new hampshire",91,NA
+"new jersey",NA,NA
+"new mexico",97,NA
+"new york",NA,0.394967140397057
+"north carolina",NA,NA
+"north dakota",NA,NA
+"ohio",NA,0.651701270835474
+"oklahoma",90,NA
+"oregon",92,0.171212769346312
+"pennsylvania",NA,NA
+"rhode island",NA,NA
+"south carolina",NA,NA
+"south dakota",105,0.178758057300001
+"tennessee",NA,NA
+"texas",NA,0.244472610764205
+"utah",NA,0.591287760064006
+"vermont",NA,0.932553769089282
+"virginia",NA,NA
+"washington",NA,NA
+"west virginia",NA,NA
+"wisconsin",NA,NA
+"wyoming",NA,0.362366686109453
