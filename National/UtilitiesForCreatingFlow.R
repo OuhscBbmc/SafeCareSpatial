@@ -39,5 +39,5 @@ dsStateLabels <- plyr::rename(dsStateLabels, replace=c("X1"="X", "X2"="Y"))
 ### Create neighbors object (nb) with labels
 ######################################
 stateNBForLabels <- spdep::poly2nb(statePolygonsForLabels)
-adjMatrix <- spdep::nb2mat(hh,style="B") #check that adjacency matrix can be created
+adjMatrix <- spdep::nb2mat(stateNBForLabels,style="B") #check that adjacency matrix can be created
 
