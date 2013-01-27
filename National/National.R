@@ -27,6 +27,9 @@ years <- sort(unique(ds$Year))
 colorLow <- hcl(h=45, c=20, l=90)
 colorHigh <- hcl(h=25, c=60, l=50)
 
+range(dsPolygon$long)
+range(dsPolygon$lat)
+
 # for( year in years ) {
   year <- 2010
   dsYear <- ds[ds$Year==year, ]
@@ -34,14 +37,17 @@ colorHigh <- hcl(h=25, c=60, l=50)
   g <- ggplot(dsYear, aes(map_id = StateName)) 
   g <- g + geom_map(aes_string(fill=dvName), colour='grey90', map=dsPolygon, size=.1)
   g <- g + scale_fill_continuous(na.value = "grey75", low=colorLow , high=colorHigh, name="", guide=guide_colorbar()) 
-  g <- g + expand_limits(x = dsPolygon$long, y = dsPolygon$lat)
+  g <- g + expand_limits(x=c(-122.5, -70), y=c(26, 48.3))
+#   g <- g + xlim(c(-123, -67.00742)) + ylim(c(25.12993, 49.38323))
   g <- g + coord_map() #Set the correct aspect ratio.
   g <- g + theme(axis.text.x=element_blank(), axis.text.y=element_blank(), axis.title.x=element_blank(), axis.title.y=element_blank(), axis.ticks.length=unit(0, "cm")) #Turn of coordinates
-  g <- g + theme(plot.background=element_blank(), panel.background=element_blank()) #Clear background grid
-  g <- g + theme(legend.position=c(.8,1), legend.justification=c("right","top")) #Move the legend
-#   g <- g + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) #Remove blank border
+#   g <- g + theme(plot.background=element_blank(), panel.background=element_blank()) #Clear background grid
+  g <- g + theme(legend.position=c(.8,1.05), legend.justification=c("right","top")) #Move the legend
+  g <- g + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) #Remove blank border
   g <- g + labs(main="dssd", x="xxxx")
-#   g <- g + ggtitle("dssd")
+
+  g <- g + theme(legend.background = element_rect(fill=NA))
+
   
 
 
