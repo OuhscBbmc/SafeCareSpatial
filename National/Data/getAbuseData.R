@@ -7,6 +7,29 @@
 setwd("C:\\Users\\dbard\\Documents\\GitHub\\SafeCare CE\\SafeCareSpatial\\National\\Data")
 fakeLong <- read.table("FakeLongitudinalData.csv",sep=",",header=T)
 
+#fix 2007 tables
+
+fileName <- paste0("refResponse",c(2007:2011)[1],".txt")
+fileName <- paste0("unqVictims",c(2007:2011)[1],"a.txt")
+datLines <- readLines(fileName,warn=F)
+screenDat <- data.frame(matrix(NA,1,4))
+
+for(i in 1:length(datLines)){
+	startStateName <- 1
+	endStateName <- max(which(tolower(unlist(strsplit(datLines[i],""))) %in% letters))
+	endLine <- nchar(datLines[i])
+	stateNames <- tolower(substring(datLines[i],startStateName,endStateName))	
+	keepOther <- unlist(strsplit(substring(datLines[i],endStateName+2,endLine),"\\s"))
+	keepOther <- keepOther[keepOther!=""]
+	lenKO <- length(keepOther)
+	if(length(keepOther)>0) screenDat[i,] <- c(stateNames,keepOther[4],keepOther[5],keepOther[6])	
+}
+
+#colnames(screenDat) <- c("State","Substantiated","Total Report Dispositions")
+colnames(screenDat) <- c("State","childPop","numDup","rateDup")
+#write.table(screenDat,"refResponse2007a.csv",sep=",",row.names = F)
+write.table(screenDat,"unqVictims2007a.csv",sep=",",row.names = F)
+
 
 createDatDF <- function(fileName, datColNames, thisYear) {
 	datLines <- readLines(fileName,warn=F)
@@ -15,7 +38,6 @@ createDatDF <- function(fileName, datColNames, thisYear) {
 	colnames(screenDat) <- datColNames
 	
 	for(i in 1:length(datLines)){
-		i <- 1
 		startStateName <- 1
 		endStateName <- max(which(tolower(unlist(strsplit(datLines[i],""))) %in% letters))
 		endLine <- nchar(datLines[i])
