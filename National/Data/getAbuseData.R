@@ -15,6 +15,7 @@ createDatDF <- function(fileName, datColNames, thisYear) {
 	colnames(screenDat) <- datColNames
 	
 	for(i in 1:length(datLines)){
+		i <- 1
 		startStateName <- 1
 		endStateName <- max(which(tolower(unlist(strsplit(datLines[i],""))) %in% letters))
 		endLine <- nchar(datLines[i])
@@ -40,7 +41,10 @@ for(i in 1:5){
 
 screenDat <- do.call("rbind",screenList)
 
-#screenList[[i]] <- createDatDF(fileName = fileName, datColNames = datColNames, thisYear = c(2007:2011)[i])
+fileName <- paste0("investA",c(2007:2011)[5],".txt")
+datColNames <- c("StateName","Year","substantiated","indicated","altRespVict","altRespNonVict","unsubstantiated","intentFalse")
+
+practice <- createDatDF(fileName = fileName, datColNames = datColNames, thisYear = c(2007:2011)[5])
 
 
 screenDat$StateName[!screenDat$StateName %in% fakeLong$StateName]

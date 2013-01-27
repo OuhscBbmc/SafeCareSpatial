@@ -4,6 +4,7 @@ library(ggplot2)
 library(plyr)
 library(maps)
 library(maptools)
+library(spdep)
 # windows() #If you want to pop out the window
 
 dsPolygon = ggplot2::map_data('state')
@@ -37,6 +38,13 @@ dsStateLabels <- data.frame(StateName = unique(stateNamesForLabels), coordinates
 dsStateLabels$Abbreviations <- c("AL", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "ID", "IL", "IN", "IO", "KA", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NH", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VY", "VA", "WA", "WV", "WI", "WY")
 dsStateLabels <- plyr::rename(dsStateLabels, replace=c("X1"="X", "X2"="Y"))
 # write.csv(dsStateLabels, "National/Data/StateLabels.csv", row.names=FALSE)
+
+
+######################################
+### Create neighbors object (nb) with labels
+######################################
+stateNBForLabels <- poly2nb(statePolygonsForLabels)
+adjMatrix <- nb2mat(hh,style="B") #check that adjacency matrix can be created
 
 
 # dsLabels <- read.csv("National/Data/StateLabels.csv", stringsAsFactors=FALSE)
