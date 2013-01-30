@@ -1,0 +1,246 @@
+"StateName","Year","CountPerCapita","Proportion","Subst","Indic","Alt","totResponse","Year.1"
+"alabama",2007,NA,NA,"6,387",NA,NA,"18,710",2007
+"alabama",2008,NA,NA,"6,518",NA,NA,"19,605",2008
+"alabama",2009,NA,NA,"5,804",NA,NA,"18,651",2009
+"alabama",2010,NA,NA,"6,728",NA,NA,"19,900",2010
+"alabama",2011,NA,NA,NA,NA,NA,NA,NA
+"arizona",2007,NA,NA,"2,879","111",NA,"33,188",2007
+"arizona",2008,NA,NA,"2,462","150",NA,"29,572",2008
+"arizona",2009,NA,NA,"2,687","159",NA,"32,136",2009
+"arizona",2010,NA,NA,"3,715","429",NA,"25,580",2010
+"arizona",2011,NA,NA,NA,NA,NA,NA,NA
+"arkansas",2007,NA,NA,"6,967",NA,NA,"27,846",2007
+"arkansas",2008,NA,NA,"6,748",NA,NA,"27,824",2008
+"arkansas",2009,NA,NA,"7,428",NA,NA,"30,381",2009
+"arkansas",2010,NA,NA,"8,743",NA,NA,"34,532",2010
+"arkansas",2011,NA,NA,NA,NA,NA,NA,NA
+"california",2007,NA,NA,"54,533",NA,NA,"232,297",2007
+"california",2008,NA,NA,"52,546",NA,NA,"244,194",2008
+"california",2009,NA,NA,"49,823",NA,NA,"235,812",2009
+"california",2010,NA,NA,"51,188",NA,NA,"228,535",2010
+"california",2011,NA,NA,NA,NA,NA,NA,NA
+"colorado",2007,97,NA,"7,196",NA,NA,"31,520",2007
+"colorado",2008,97,NA,"7,528",NA,NA,"34,164",2008
+"colorado",2009,97,NA,"7,697",NA,NA,"33,978",2009
+"colorado",2010,97,NA,"7,464",NA,NA,"32,969",2010
+"colorado",2011,97,NA,NA,NA,NA,NA,NA
+"connecticut",2007,105,NA,"6,634",NA,NA,"26,479",2007
+"connecticut",2008,105,NA,"6,505",NA,NA,"24,409",2008
+"connecticut",2009,105,NA,"6,603",NA,NA,"24,937",2009
+"connecticut",2010,105,NA,"7,075",NA,NA,"25,777",2010
+"connecticut",2011,105,NA,NA,NA,NA,NA,NA
+"delaware",2007,NA,0.901174078,"1,369",NA,NA,"5,693",2007
+"delaware",2008,NA,0.901174078,"1,498",NA,NA,"6,274",2008
+"delaware",2009,NA,0.901174078,"1,372",NA,NA,"5,862",2009
+"delaware",2010,NA,0.901174078,"1,444",NA,NA,"6,681",2010
+"delaware",2011,NA,0.901174078,NA,NA,NA,NA,NA
+"district of columbia",2007,NA,NA,"1,699",NA,NA,"4,506",2007
+"district of columbia",2008,NA,NA,"1,588",NA,NA,"4,694",2008
+"district of columbia",2009,NA,NA,"1,990",NA,NA,"6,593",2009
+"district of columbia",2010,NA,NA,"1,697",NA,NA,"5,806",2010
+"district of columbia",2011,NA,NA,NA,NA,NA,NA,NA
+"florida",2007,NA,NA,"31,656",NA,NA,"154,951",2007
+"florida",2008,NA,NA,"31,310",NA,NA,"173,218",2008
+"florida",2009,NA,NA,"30,134",NA,NA,"153,733",2009
+"florida",2010,NA,NA,"33,612",NA,NA,"151,441",2010
+"florida",2011,NA,NA,NA,NA,NA,NA,NA
+"georgia",2007,NA,NA,"21,541",NA,NA,"48,965",2007
+"georgia",2008,NA,NA,"16,298",NA,NA,"32,430",2008
+"georgia",2009,NA,NA,"15,341",NA,NA,"28,095",2009
+"georgia",2010,NA,NA,"13,282",NA,NA,"26,011",2010
+"georgia",2011,NA,NA,NA,NA,NA,NA,NA
+"idaho",2007,NA,NA,"1,064",NA,NA,"7,089",2007
+"idaho",2008,NA,NA,"1,180",NA,NA,"6,783",2008
+"idaho",2009,NA,NA,"1,095",NA,NA,"6,966",2009
+"idaho",2010,NA,NA,"1,050",NA,NA,"6,643",2010
+"idaho",2011,NA,NA,NA,NA,NA,NA,NA
+"illinois",2007,NA,NA,"17,207",NA,NA,"68,101",2007
+"illinois",2008,NA,NA,"17,511",NA,NA,"67,021",2008
+"illinois",2009,NA,NA,"17,546",NA,NA,"68,591",2009
+"illinois",2010,NA,NA,"16,778",NA,NA,"65,761",2010
+"illinois",2011,NA,NA,NA,NA,NA,NA,NA
+"indiana",2007,99,NA,"12,899",NA,NA,"41,900",2007
+"indiana",2008,99,NA,"14,929","2",NA,"66,690",2008
+"indiana",2009,99,NA,"16,198",NA,NA,"67,505",2009
+"indiana",2010,99,NA,"15,332",NA,NA,"66,735",2010
+"indiana",2011,99,NA,NA,NA,NA,NA,NA
+"iowa",2007,NA,NA,"8,958",NA,NA,"23,093",2007
+"iowa",2008,NA,NA,"7,292",NA,NA,"21,661",2008
+"iowa",2009,NA,NA,"8,378",NA,NA,"24,940",2009
+"iowa",2010,NA,NA,"8,550",NA,NA,"24,982",2010
+"iowa",2011,NA,NA,NA,NA,NA,NA,NA
+"kansas",2007,NA,NA,"1,558",NA,NA,"16,912",2007
+"kansas",2008,NA,NA,"1,214",NA,NA,"16,823",2008
+"kansas",2009,NA,NA,"1,016",NA,NA,"17,942",2009
+"kansas",2010,NA,NA,"1,116",NA,NA,"17,379",2010
+"kansas",2011,NA,NA,NA,NA,NA,NA,NA
+"kentucky",2007,NA,NA,"9,843",NA,"1,724","48,600",2007
+"kentucky",2008,NA,NA,"9,771",NA,"1,617","49,976",2008
+"kentucky",2009,NA,NA,"9,137",NA,"1,564","47,633",2009
+"kentucky",2010,NA,NA,"9,723",NA,"1,516","49,141",2010
+"kentucky",2011,NA,NA,NA,NA,NA,NA,NA
+"louisiana",2007,NA,NA,"5,792",NA,NA,"19,293",2007
+"louisiana",2008,NA,NA,"6,198",NA,NA,"21,405",2008
+"louisiana",2009,NA,NA,"5,909",NA,NA,"22,804",2009
+"louisiana",2010,NA,NA,"5,536",NA,NA,"21,822",2010
+"louisiana",2011,NA,NA,NA,NA,NA,NA,NA
+"maine",2007,NA,NA,"2,566",NA,NA,"6,710",2007
+"maine",2008,NA,NA,"2,447",NA,NA,"6,216",2008
+"maine",2009,NA,NA,"2,484",NA,NA,"6,288",2009
+"maine",2010,NA,NA,"2,179",NA,NA,"6,077",2010
+"maine",2011,NA,NA,NA,NA,NA,NA,NA
+"maryland",2007,NA,NA,NA,NA,NA,NA,2007
+"maryland",2008,NA,NA,NA,NA,NA,NA,2008
+"maryland",2009,NA,NA,"5,687","5,741",NA,"28,929",2009
+"maryland",2010,NA,NA,"4,988","4,756",NA,"26,294",2010
+"maryland",2011,NA,NA,NA,NA,NA,NA,NA
+"massachusetts",2007,NA,NA,"23,012",NA,NA,"39,801",2007
+"massachusetts",2008,NA,NA,"25,590",NA,NA,"44,307",2008
+"massachusetts",2009,NA,NA,"23,935",NA,NA,"42,447",2009
+"massachusetts",2010,NA,NA,"16,621",NA,NA,"39,825",2010
+"massachusetts",2011,NA,NA,NA,NA,NA,NA,NA
+"michigan",2007,81,NA,NA,NA,NA,NA,2007
+"michigan",2008,81,NA,"10,656","7,297",NA,"71,820",2008
+"michigan",2009,81,NA,"10,601","9,153",NA,"75,441",2009
+"michigan",2010,81,NA,"11,363","9,991",NA,"77,286",2010
+"michigan",2011,81,NA,NA,NA,NA,NA,NA
+"minnesota",2007,NA,NA,"4,506",NA,NA,"18,993",2007
+"minnesota",2008,NA,NA,"3,855",NA,NA,"18,608",2008
+"minnesota",2009,NA,NA,"3,276",NA,NA,"17,678",2009
+"minnesota",2010,NA,NA,"3,085",NA,NA,"17,803",2010
+"minnesota",2011,NA,NA,NA,NA,NA,NA,NA
+"mississippi",2007,90,NA,"4,791",NA,NA,"17,871",2007
+"mississippi",2008,90,NA,"5,480",NA,NA,"19,063",2008
+"mississippi",2009,90,NA,"5,302",NA,NA,"19,717",2009
+"mississippi",2010,90,NA,"5,334",NA,NA,"19,976",2010
+"mississippi",2011,90,NA,NA,NA,NA,NA,NA
+"missouri",2007,NA,NA,"5,452",NA,NA,"54,635",2007
+"missouri",2008,NA,NA,"4,133",NA,NA,"49,129",2008
+"missouri",2009,NA,NA,"4,085",NA,NA,"49,755",2009
+"missouri",2010,NA,NA,"4,061",NA,NA,"50,969",2010
+"missouri",2011,NA,NA,NA,NA,NA,NA,NA
+"montana",2007,NA,0.770823122,"1,024","106",NA,"8,699",2007
+"montana",2008,NA,0.770823122,"952","68",NA,"7,988",2008
+"montana",2009,NA,0.770823122,"950","60",NA,"8,148",2009
+"montana",2010,NA,0.770823122,"844","44",NA,"7,419",2010
+"montana",2011,NA,0.770823122,NA,NA,NA,NA,NA
+"nebraska",2007,NA,NA,"2,401",NA,NA,"11,290",2007
+"nebraska",2008,NA,NA,"2,806",NA,NA,"12,472",2008
+"nebraska",2009,NA,NA,"3,198",NA,NA,"13,532",2009
+"nebraska",2010,NA,NA,"2,923",NA,NA,"13,138",2010
+"nebraska",2011,NA,NA,NA,NA,NA,NA,NA
+"nevada",2007,NA,NA,"3,068",NA,NA,"16,342",2007
+"nevada",2008,NA,NA,"2,849",NA,NA,"14,332",2008
+"nevada",2009,NA,NA,"2,887",NA,NA,"12,241",2009
+"nevada",2010,NA,NA,"3,019",NA,NA,"12,108",2010
+"nevada",2011,NA,NA,NA,NA,NA,NA,NA
+"new hampshire",2007,91,NA,"649",NA,NA,"6,834",2007
+"new hampshire",2008,91,NA,"831",NA,NA,"8,031",2008
+"new hampshire",2009,91,NA,"676",NA,NA,"7,880",2009
+"new hampshire",2010,91,NA,"615",NA,NA,"7,909",2010
+"new hampshire",2011,91,NA,NA,NA,NA,NA,NA
+"new jersey",2007,NA,NA,"5,352",NA,NA,"44,606",2007
+"new jersey",2008,NA,NA,"6,299",NA,NA,"53,895",2008
+"new jersey",2009,NA,NA,"6,301",NA,NA,"55,909",2009
+"new jersey",2010,NA,NA,"6,377",NA,NA,"60,168",2010
+"new jersey",2011,NA,NA,NA,NA,NA,NA,NA
+"new mexico",2007,97,NA,"3,784",NA,NA,"14,853",2007
+"new mexico",2008,97,NA,"3,593",NA,NA,"14,469",2008
+"new mexico",2009,97,NA,"3,328",NA,NA,"14,535",2009
+"new mexico",2010,97,NA,"3,686",NA,NA,"16,622",2010
+"new mexico",2011,97,NA,NA,NA,NA,NA,NA
+"new york",2007,NA,0.39496714,"50,989",NA,NA,"155,509",2007
+"new york",2008,NA,0.39496714,"50,989",NA,NA,"159,556",2008
+"new york",2009,NA,0.39496714,"54,156",NA,NA,"168,658",2009
+"new york",2010,NA,0.39496714,"53,172",NA,NA,"169,395",2010
+"new york",2011,NA,0.39496714,NA,NA,NA,NA,NA
+"north carolina",2007,NA,NA,"6,775",NA,"6,820","66,814",2007
+"north carolina",2008,NA,NA,"5,248",NA,"7,413","69,428",2008
+"north carolina",2009,NA,NA,"4,937",NA,NA,"67,652",2009
+"north carolina",2010,NA,NA,"4,693",NA,"7,336","66,136",2010
+"north carolina",2011,NA,NA,NA,NA,NA,NA,NA
+"north dakota",2007,NA,NA,"660",NA,NA,"3,586",2007
+"north dakota",2008,NA,NA,"680",NA,NA,"4,011",2008
+"north dakota",2009,NA,NA,"661",NA,NA,"3,886",2009
+"north dakota",2010,NA,NA,"581",NA,NA,"3,871",2010
+"north dakota",2011,NA,NA,NA,NA,NA,NA,NA
+"ohio",2007,NA,0.651701271,"16,508","10,268",NA,"77,436",2007
+"ohio",2008,NA,0.651701271,"15,734","9,732",NA,"83,827",2008
+"ohio",2009,NA,0.651701271,"14,595",NA,NA,"78,098",2009
+"ohio",2010,NA,0.651701271,"14,669","9,310",NA,"71,811",2010
+"ohio",2011,NA,0.651701271,NA,NA,NA,NA,NA
+"oklahoma",2007,90,NA,"7,344",NA,NA,"35,873",2007
+"oklahoma",2008,90,NA,"6,207",NA,NA,"34,940",2008
+"oklahoma",2009,90,NA,"4,303",NA,NA,"29,408",2009
+"oklahoma",2010,90,NA,"4,521",NA,NA,"28,583",2010
+"oklahoma",2011,90,NA,NA,NA,NA,NA,NA
+"oregon",2007,92,0.171212769,"7,227",NA,NA,"26,381",2007
+"oregon",2008,92,0.171212769,"6,943",NA,NA,"27,485",2008
+"oregon",2009,92,0.171212769,"7,240",NA,NA,"28,584",2009
+"oregon",2010,92,0.171212769,"7,306",NA,NA,"29,021",2010
+"oregon",2011,92,0.171212769,NA,NA,NA,NA,NA
+"pennsylvania",2007,NA,NA,"4,177",NA,NA,"23,513",2007
+"pennsylvania",2008,NA,NA,"4,055",NA,NA,"25,051",2008
+"pennsylvania",2009,NA,NA,"4,084",NA,NA,"25,839",2009
+"pennsylvania",2010,NA,NA,"3,706",NA,NA,"24,840",2010
+"pennsylvania",2011,NA,NA,NA,NA,NA,NA,NA
+"rhode island",2007,NA,NA,"2,462",NA,NA,"7,710",2007
+"rhode island",2008,NA,NA,"1,957",NA,NA,"6,356",2008
+"rhode island",2009,NA,NA,"1,977",NA,NA,"6,110",2009
+"rhode island",2010,NA,NA,"2,328",NA,NA,"6,825",2010
+"rhode island",2011,NA,NA,NA,NA,NA,NA,NA
+"south carolina",2007,NA,NA,"7,222",NA,NA,"18,337",2007
+"south carolina",2008,NA,NA,"7,025",NA,NA,"18,206",2008
+"south carolina",2009,NA,NA,"7,062",NA,NA,"17,721",2009
+"south carolina",2010,NA,NA,"6,889",NA,NA,"18,803",2010
+"south carolina",2011,NA,NA,NA,NA,NA,NA,NA
+"south dakota",2007,105,0.178758057,"851",NA,NA,"3,627",2007
+"south dakota",2008,105,0.178758057,"835",NA,NA,"3,589",2008
+"south dakota",2009,105,0.178758057,"851",NA,NA,"3,920",2009
+"south dakota",2010,105,0.178758057,"797",NA,NA,"3,838",2010
+"south dakota",2011,105,0.178758057,NA,NA,NA,NA,NA
+"tennessee",2007,NA,NA,"9,961","723",NA,"62,183",2007
+"tennessee",2008,NA,NA,"7,644","499",NA,"61,346",2008
+"tennessee",2009,NA,NA,"6,391",NA,NA,"57,143",2009
+"tennessee",2010,NA,NA,"6,272","446",NA,"59,487",2010
+"tennessee",2011,NA,NA,NA,NA,NA,NA,NA
+"texas",2007,NA,0.244472611,"42,295",NA,NA,"166,584",2007
+"texas",2008,NA,0.244472611,"41,931",NA,NA,"169,628",2008
+"texas",2009,NA,0.244472611,"40,741",NA,NA,"170,576",2009
+"texas",2010,NA,0.244472611,"39,721",NA,NA,"175,168",2010
+"texas",2011,NA,0.244472611,NA,NA,NA,NA,NA
+"utah",2007,NA,0.59128776,"8,507",NA,NA,"20,386",2007
+"utah",2008,NA,0.59128776,"8,215",NA,NA,"19,922",2008
+"utah",2009,NA,0.59128776,"8,473",NA,NA,"20,534",2009
+"utah",2010,NA,0.59128776,"8,354",NA,NA,"20,043",2010
+"utah",2011,NA,0.59128776,NA,NA,NA,NA,NA
+"vermont",2007,NA,0.932553769,"728",NA,NA,"2,564",2007
+"vermont",2008,NA,0.932553769,"572",NA,NA,"2,359",2008
+"vermont",2009,NA,0.932553769,"606",NA,NA,"3,215",2009
+"vermont",2010,NA,0.932553769,"609",NA,NA,"3,795",2010
+"vermont",2011,NA,0.932553769,NA,NA,NA,NA,NA
+"virginia",2007,NA,NA,"4,377",NA,NA,"30,196",2007
+"virginia",2008,NA,NA,"4,150",NA,NA,"28,969",2008
+"virginia",2009,NA,NA,"4,138",NA,NA,"30,364",2009
+"virginia",2010,NA,NA,"4,519",NA,NA,"33,996",2010
+"virginia",2011,NA,NA,NA,NA,NA,NA,NA
+"washington",2007,NA,NA,"4,769",NA,NA,"35,262",2007
+"washington",2008,NA,NA,"4,613",NA,NA,"35,693",2008
+"washington",2009,NA,NA,"4,521",NA,NA,"30,405",2009
+"washington",2010,NA,NA,"5,025",NA,NA,"34,621",2010
+"washington",2011,NA,NA,NA,NA,NA,NA,NA
+"west virginia",2007,NA,NA,"4,438",NA,NA,"21,962",2007
+"west virginia",2008,NA,NA,"3,705",NA,NA,"23,103",2008
+"west virginia",2009,NA,NA,"3,283",NA,NA,"22,249",2009
+"west virginia",2010,NA,NA,"2,519",NA,NA,"17,686",2010
+"west virginia",2011,NA,NA,NA,NA,NA,NA,NA
+"wisconsin",2007,NA,NA,"5,468",NA,NA,"26,978",2007
+"wisconsin",2008,NA,NA,"4,250",NA,NA,"26,382",2008
+"wisconsin",2009,NA,NA,"3,654",NA,NA,"25,543",2009
+"wisconsin",2010,NA,NA,"3,531",NA,NA,"26,521",2010
+"wisconsin",2011,NA,NA,NA,NA,NA,NA,NA
+"wyoming",2007,NA,0.362366686,"478",NA,NA,"2,442",2007
+"wyoming",2008,NA,0.362366686,"449",NA,NA,"2,398",2008
+"wyoming",2009,NA,0.362366686,"455",NA,NA,"2,669",2009
+"wyoming",2010,NA,0.362366686,"446",NA,NA,"3,213",2010
+"wyoming",2011,NA,0.362366686,NA,NA,NA,NA,NA
