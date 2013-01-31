@@ -1,0 +1,49 @@
+model{
+    for(i in 1:ncnty){
+        for(j in 1:nyear){
+            n_dmat[i,j]~dpois(mu[i,j])
+#Modelling of the mean for every county and period
+            log(mu[i,j])<-log(SMRd91[i,j])+mediainter+inter[j]+theta.ST[j,i]
+#SMR for every county and period
+            bSMR[i,j]<-exp(mediainter+inter[j]+theta.ST[j,i])
+#Contribution of the i-th county in the j-th period to the deviance
+            D.ij[i,j]<-n_dmat[i,j]*log(mu[i,j])-mu[i,j]-(n_dmat[i,j]*log(n_dmat[i,j])-n_dmat[i,j])
+        }
+#Contribution of the i-th municipality to the deviance
+        D.i[i]<-sum(D.ij[i,])
+    }
+#Deviance
+    D<- -2*sum(D.i[])
+    
+#Spatio-temporal effect for the first period
+    theta.S[1,1:ncnty]~car.normal(adj[],w[],num[],prec.spat)
+    for(i in 1:ncnty){
+      BYM[1,i]~dnorm(theta.S[1,i],prec.het)
+    }
+    for(i in 1:ncnty){theta.ST[1,i]<-pow(1-ro*ro,-0.5)*BYM[1,i]}
+#Spatio-temporal effect for the subsequent periods
+    for(j in 2:nyear){
+        for(i in 1:ncnty){
+            theta.ST[j,i]<-ro*theta.ST[j-1,i]+BYM[j,i]
+            BYM[j,i]~dnorm(theta.S[j,i],prec.het)
+        }
+        theta.S[j,1:ncnty]~car.normal(adj[],w[],num[],prec.spat)
+    }
+
+#Prior distribution for the mean risk for every municipality and period
+    mediainter~dnorm(0,0.01)
+#Prior distribution for the global time trend
+    inter[1:nyear]~car.normal(adjT[],wT[],numT[],prec.inter)
+#Prior distribution for the precision parameters in the model
+	prec.inter~dgamma(0.5,0.005)
+	inter.var<-1/prec.inter
+	inter.sd<-pow(inter.var,2)
+    prec.het~dgamma(0.5,0.005)
+	het.var<-1/prec.het
+    het.sd<-pow(het.var,2)
+    prec.spat~dgamma(0.5,0.005)
+	spat.var<-1/prec.spat	
+	spat.sd<-pow(spat.var,2)    	
+#Prior distribution for the temporal dependence parameter
+    ro~dunif(-1,1)
+} 
