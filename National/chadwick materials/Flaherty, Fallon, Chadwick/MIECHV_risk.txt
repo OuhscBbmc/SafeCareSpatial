@@ -1,0 +1,8 @@
+﻿Gerrard, M., Gibbons, F. X., Houlihan, A. E., Stock, M. L., & Pomery, E. A. (2008). A dual-process approach to health risk decision making: The prototype willingness model. Developmental Review, 28(1), 29-61. doi: 10.1016/j.dr.2007.10.001
+Leeb, R. T., Paulozzi, L. J., Melanson, C., Simon, T. R., & Arias, I. (2008). Child maltreatment surveillance: Uniform deﬁnitions for public health and recommended data elements, version 1.0.  Atlanta, GA: Centers for Disease Control and Prevention, National Center for Injury Prevention and Control.
+Mossman, D. (2013). Evaluating Risk Assessments Using Receiver Operating Characteristic Analysis: Rationale, Advantages, Insights, and Limitations. Behav Sci Law. doi: 10.1002/bsl.2050
+Repetti, R. L., Taylor, S. E., & Seeman, T. E. (2002). Risky families: Family social environments and the mental and physical health of offspring. Psychological Bulletin, 128(2), 330-366. doi: 10.1037/0033-2909.128.2.330
+Slovic, P., Finucane, M. L., Peters, E., & MacGregor, D. G. (2004). Risk as analysis and risk as feelings: some thoughts about affect, reason, risk, and rationality. Risk Anal, 24(2), 311-322. doi: 10.1111/j.0272-4332.2004.00433.x
+Weber, E. U., Blais, A.-R. e., & Betz, N. E. (2002). A domain-specific risk-attitude scale: measuring risk perceptions and risk behaviors. Journal of Behavioral Decision Making, 15(4), 263-290. doi: 10.1002/bdm.414
+Weber, E. U., & Hsee, C. K. (1998). Cross-cultural differences in risk perception, but cross-cultural similarities in attitudes towards perceived risk. Management Science, 44(9), 1205-1217. 
+Weber, E. U., & Hsee, C. K. (1999). Models and mosaics: investigating cross-cultural differences in risk perception and risk preference. Psychon Bull Rev, 6(4), 611-617. 
