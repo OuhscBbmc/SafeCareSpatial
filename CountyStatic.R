@@ -18,7 +18,8 @@ require(plyr)
 # deviceHeight <- deviceWidth * aspectRatio
 # windows(width=deviceWidth, height=deviceHeight)
 
-pathInputDirectory <- "F:/Projects/OuHsc/SafeCare/Spatial/SafeCareSpatial/PhiFreeDatasets"
+pathInputDirectory <- "D:/Projects/Ouhsc/SafeCareSpatial/PhiFreeDatasets"
+# pathInputDirectory <- "./PhiFreeDatasets"
 pathInputSummaryCounty <- file.path(pathInputDirectory, "CountCountyFortified.csv")
 
 
